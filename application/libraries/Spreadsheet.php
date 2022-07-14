@@ -1,5 +1,6 @@
 <?php
-require_once APPPATH."libraries/PhpSpreadsheet/vendor/autoload.php";
+// require_once APPPATH."libraries/PhpSpreadsheet/vendor/autoload.php";
+include 'PhpSpreadsheet/vendor/autoload.php';
 class Spreadsheet{
 
     public  $IOFactory;

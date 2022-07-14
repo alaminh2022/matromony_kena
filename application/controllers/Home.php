@@ -71,7 +71,7 @@ class Home extends CI_Controller {
         $page_data['happy_stories'] = $this->db->get_where('happy_story', array('approval_status' => 1), $max_story_num)->result();
         $page_data['all_plans'] = $this->db->get("plan")->result();
         $page_data['page_url'] = "";
-        $this->load->view('front/index', $page_data);
+        $this->load->view('front2/index', $page_data);
     }
 
     function member_permission()

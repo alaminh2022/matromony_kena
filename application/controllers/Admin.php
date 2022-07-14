@@ -4912,7 +4912,8 @@ class Admin extends CI_Controller {
 				                $header_logo[] = array('image' => $img_file_name);
 
 				                $data['value'] = json_encode($header_logo);
-
+								// print_r($header_logo);
+								// exit;
 				                $this->db->where('type', 'header_logo');
 								$this->db->update('frontend_settings', $data);
 								recache();

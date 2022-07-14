@@ -703,9 +703,9 @@
   color: rgba(255, 255, 255, 0.9);
   background: transparent; }
 
-.navbar.bg-default {
+/* .navbar.bg-default {
   background: white;
-  border-bottom: 1px solid #f1f1f1; }
+  border-bottom: 1px solid #f1f1f1; } */
 
 .navbar.bg-light {
   background-color: #f2f2f2; }
