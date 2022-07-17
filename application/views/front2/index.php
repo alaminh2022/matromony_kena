@@ -87,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <img src="<?php echo base_url('uploads/home_page/home_banner/home_banner1.jpg'); ?>" alt="">
                 </div>
                 
-                <div class="st-pusher">
+                <div class="st-pusher  t1-st-bg-hover">
                     <div class="st-content">
                         <div class="st-content-inner t1-head-space-area">
                             <!-- Navbar -->
@@ -122,16 +122,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                         <div class="collapse navbar-collapse align-items-center justify-content-end" id="navbar_main">
                                             <!-- Navbar links -->
-                                            <ul class="navbar-nav t1-nav-right" data-hover="dropdown">
-                                               
-                                               
-                                                <li class="custom-nav login-menu t1-m-left">
-                                                    <a class="login-btn" href="#">Login</a>
-                                                </li>
-                                                <li class="custom-nav login-menu">
-                                                    <a class="login-btn" href="#">Register</a>
-                                                </li>
-                                            </ul>
+                                           <div class="did-you-t1">
+                                                 Are you already registered? <a href="" class="t1-login-btn-22"> LOGIN</a>
+                                           </div>
                                         </div>
                                     </div>
                                 </nav>
@@ -179,13 +172,79 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
                 <div class="t1-get-start-area container ">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="row t1-ro-bg-white">
+                    <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 t1-pa-rigt-0">
+                            <img class="sub-banner-t1" src="<?php echo base_url('uploads/home_page/home_banner/photo-desktop-m-2x.jpg'); ?>" alt="">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 t1-pad-left-0">
                            <div class="area-banner-left-form">
-                               <div class="blan-area-top">
+                               <!-- <div class="blan-area-top">
                                  <div class="arrow-down t1-p-arrow-down"></div>
+                               </div> -->
+                               <div class="t1-h2-clz">
+                                <h2 class="content__slogan slogan slogan--desktop">
+                                    Register <br>
+                                    and meet people! </h2>
                                </div>
-                            <form class="form-inverse mt-4 t1-form-get-start-area" data-toggle="validator" role="form" action="<?=base_url()?>home/listing/home_search" method="POST" style="margin-top: 0px !important;">
+                               <div class="person-form js-page js-page-1 js-active-page" data-step-id="42">
+                                    <div class="person-form__item person-gender">
+                                    <div class="person-form__container">
+                                    <span class="label-text">I am a:</span>
+                                    <div class="person-gender__items-wrapper person-form__content">
+                                    <div class="person-gender__item js-gender-err">
+                                    <input class="person-gender__input js-gender-input" type="radio" name="person-gender" id="person-male" value="m" readonly="readonly">
+                                    <label class="person-gender__label js-gender-err" for="person-male">Man</label>
+                                    </div>
+                                    <div class="person-gender__item js-gender-err">
+                                    <input class="person-gender__input js-gender-input" type="radio" name="person-gender" id="person-female" value="f" readonly="readonly">
+                                    <label class="person-gender__label js-gender-err" for="person-female">Woman</label>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="error-block js-error gender-error-block"></div>
+                                    </div>
+                                    <div class="person-form__item person-name">
+                                    <div class="person-form__container">
+                                    <label class="label-text " for="person-name">Your name:</label>
+                                    <div class="person-name__item image-wrapper person-form__content">
+                                    <input class="person-form__input" type="text" id="person-name" placeholder="Indicate your name" readonly="readonly">
+                                    
+                                    </div>
+                                    </div>
+                                    <div class="error-block js-error name-error-block"></div>
+                                    </div>
+                                    <div class="person-form__item person-birth">
+                                    <div class="person-form__container">
+                                    <span class="personal-form__label label-text">Date of <br> birth:</span>
+                                    <div class="js-input-select birth-date person-form__content">
+                                    <select class="birth-date__input person-form__input person-form__input--date" name="birth-day" id="birth-day">
+                                    <option class="select-item" selected="" disabled="">DD</option>
+                                    <option class="select-item" value="01">01</option>
+                                    
+                                    </select>
+                                    <select class="birth-date__input person-form__input person-form__input--date" name="birth-month" id="birth-month">
+                                    <option class="select-item select-item--disabled" selected="" disabled="">ММ</option>
+                                    <option class="select-item" value="01">01</option>
+                                    <option class="select-item" value="02">02</option>
+                                
+                                    </select>
+                                    <select class="birth-date__input person-form__input person-form__input--date" name="birth-year" id="birth-year">
+                                    <option class="select-item" selected="" disabled="">YYYY</option>
+                                    <option class="select-item" value="2004">2004</option><option class="select-item" value="2003">2003</option><option class="select-item" value="2002">2002</option><option class="select-item" value="2001">2001</option><option class="select-item" value="2000">2000</option><option class="select-item" value="1999">1999</option><option class="select-item" value="1998">1998</option><option class="select-item" value="1997">1997</option><option class="select-item" value="1996">1996</option><option class="select-item" value="1995">1995</option><option class="select-item" value="1994">1994</option><option class="select-item" value="1993">1993</option><option class="select-item" value="1992">1992</option><option class="select-item" value="1991">1991</option><option class="select-item" value="1990">1990</option><option class="select-item" value="1989">1989</option><option class="select-item" value="1988">1988</option><option class="select-item" value="1987">1987</option><option class="select-item" value="1986">1986</option><option class="select-item" value="1985">1985</option><option class="select-item" value="1984">1984</option><option class="select-item" value="1983">1983</option><option class="select-item" value="1982">1982</option><option class="select-item" value="1981">1981</option><option class="select-item" value="1980">1980</option><option class="select-item" value="1979">1979</option><option class="select-item" value="1978">1978</option><option class="select-item" value="1977">1977</option><option class="select-item" value="1976">1976</option><option class="select-item" value="1975">1975</option><option class="select-item" value="1974">1974</option><option class="select-item" value="1973">1973</option><option class="select-item" value="1972">1972</option><option class="select-item" value="1971">1971</option><option class="select-item" value="1970">1970</option><option class="select-item" value="1969">1969</option><option class="select-item" value="1968">1968</option><option class="select-item" value="1967">1967</option><option class="select-item" value="1966">1966</option><option class="select-item" value="1965">1965</option><option class="select-item" value="1964">1964</option><option class="select-item" value="1963">1963</option><option class="select-item" value="1962">1962</option><option class="select-item" value="1961">1961</option><option class="select-item" value="1960">1960</option><option class="select-item" value="1959">1959</option><option class="select-item" value="1958">1958</option><option class="select-item" value="1957">1957</option><option class="select-item" value="1956">1956</option><option class="select-item" value="1955">1955</option><option class="select-item" value="1954">1954</option><option class="select-item" value="1953">1953</option><option class="select-item" value="1952">1952</option><option class="select-item" value="1951">1951</option><option class="select-item" value="1950">1950</option><option class="select-item" value="1949">1949</option><option class="select-item" value="1948">1948</option><option class="select-item" value="1947">1947</option><option class="select-item" value="1946">1946</option><option class="select-item" value="1945">1945</option><option class="select-item" value="1944">1944</option><option class="select-item" value="1943">1943</option></select>
+                                    </div>
+                                    </div>
+                                    <div class="error-block js-error birth-error-block"></div>
+                                    </div>
+                                    <button class="person-form__button-main button-main js-switch-button" type="button">Continue</button>
+                                </div>
+                                <div class="banners-block">
+                                    <div class="banners-block__wrapper">
+                                    <img class="banners-block__image banners-block__image--ssl" src="<?php echo base_url('uploads/home_page/home_banner/positive-ssl-2x.jpg'); ?>"  alt="ssl">
+                                    <img class="banners-block__image banners-block__image--comodo" src="<?php echo base_url('uploads/home_page/home_banner/comodo-2x.jpg'); ?>"  alt="ssl">
+                                    </div>
+                                    <a class="banners-block__text js-why-link keychainify-checked" href="#">Why us?</a>
+                                </div>
+                            <!-- <form class="form-inverse mt-4 t1-form-get-start-area" data-toggle="validator" role="form" action="#" method="POST" style="margin-top: 0px !important;">
                                     <h3 class="heading heading-5 strong-500 text-capitalize"><?=$home_searching_heading?></h3>
                                    
                                     <div class="row t1-form-1st-row">
@@ -259,9 +318,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     ?>
                                 
                                     <button type="submit" class="btn btn-styled btn-sm btn-block btn-base-1 mt-4 t1-btn-g">Let's Start</button>
-                                </form>
-                           </div>
+                                </form> -->
+                          
+                          
+                          
+                            </div>
                         </div>
+                        
                     </div>
                     <div class="banner-spance-bottom-t1"></div>
                 </div>
@@ -269,139 +332,74 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
     </div>
-    <div class="st-container micro-banner-t1">
-        <div class="container">
-           <div class="row">
-            <div class="col-md-4 ">
-                    <div class="row">
-                        <div class="col-md-2 col-xs-2 pad">
-                            <img src="http://match.fivedit.com/upload/icon/fc/a.png">
-                        </div>
-                        <div class="col-md-10 col-xs-10 pad_left textvide">
-                            Contact genuine profiles with 100% Verified Mobile Numbers
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-md-4 ">
-                    <div class="row">
-                        <div class="col-md-2 col-xs-2 pad">
-                            <img src="http://match.fivedit.com/upload/icon/fc/d.png">
-                        </div>
-                        <div class="col-md-10 col-xs-10 pad_left textvide">
-                            Most Trusted Matrimony Brand <br>by the Brand Trust Report 2018
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-md-4 ">
-                    <div class="row">
-                        <div class="col-md-2 col-xs-4 pad">
-                            <img src="http://match.fivedit.com/upload/icon/fc/e.png">
-                        </div>
-                        <div class="col-md-10 col-xs-8 pad_left textvide">
-                            Highest Number of Documented Marriages Online
-                        </div>
-                    </div>
-                    
-                </div>
-           </div>
-        </div>
-    </div>
-
-    <div class="st-container story-t1-slider">
-        <div class="container">
-            <div class="row">
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <img src="http://match.fivedit.com/uploads/12717599-1573050153010906-7984201916195313143-n_15_41995.jpg" />
-                        <div class="overclaa">
-                            <h4>Shahin &amp; Obonti story</h4>
-                            <p>Thanks to bebaha.com for this wonderful platform which helped me to find my soulmate.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="http://match.fivedit.com/uploads/12717599-1573050153010906-7984201916195313143-n_15_41995.jpg" />
-                        <div class="overclaa">
-                            <h4>Shahin &amp; Obonti story</h4>
-                            <p>Thanks to bebaha.com for this wonderful platform which helped me to find my soulmate.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="http://match.fivedit.com/uploads/12717599-1573050153010906-7984201916195313143-n_15_41995.jpg" />
-                        <div class="overclaa">
-                            <h4>Shahin &amp; Obonti story</h4>
-                            <p>Thanks to bebaha.com for this wonderful platform which helped me to find my soulmate.</p>
-                        </div>
-                    </div>
-                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="st-container make-story-area">
-        <h3>Make Your Story... <a class="btn-area keychainify-checked" href="#">Start</a></h3>
-    </div>
-
-    <div style="" class="st-container">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6  t1-assised-pd_0">
-                    <b><h1 class="heder_by_des">Assisted Service </h1></b> 
-                <h3 class="banner_sort">A personalised Matchmaking Service from Kenya </h3> 
-                <p class="banner_pera"> Our Relationship Managers have helped thousands of members find their perfect life partners </p>
-                </div>
-                <div class="col-md-6 move pd_0">
-                    <img src="http://match.fivedit.com/upload/img1/service.jpg" />
-                </div>
-            </div>
-           
-        </div>
-    </div>
-    <div class="st-container banner-bottom t1-sm-contct">
-        <h3>About Assitance Service... <a  class="btn-area" target="_blank" href="#">Contact us</a></h3>
-    </div>
+   
     <div class="st-container">
-        <div class="container text-center t1-about-pd_0">
-            <div class="Saitbd_red_logo">
-                <?php 
-                 if (file_exists('uploads/header_logo/'.$header_logo[0]['image'])) {
-                    ?>
-                        <img src="<?=base_url()?>uploads/header_logo/<?=$header_logo[0]['image']?>" class="img-responsive c100px" height="100%">
-                    <?php
-                    }
-                    else {
-                    ?>
-                        <img src="<?=base_url()?>uploads/header_logo/default_image.png" class="img-responsive c100px" height="100%">
-                    <?php
-                    }
-                ?>
-            </div>
-            <div class="footer_para">
-                Abc.com, is an international matrimonial web Portal aimed at fulfilling the needs of Bangladeshis both at home and abroad. It is designed to provide its members a secured and private environment to find their ultimate life partners by providing them a trusted source of genuine people trying to find their soul mates. The platform ABC.com allows members to search, communicate, chat and finally find the right person for them or their loved ones.
-            </div>
-            
-        </div>
         <div class="container">
-            <div class="container-fluid footermenu">
-                <a target="_blank" href="#" class="keychainify-checked">ABC.com</a> |
-                <a target="_blank" href="#" class="keychainify-checked">Member Login</a> | 
-                <a target="_blank" href="#" class="keychainify-checked">Signup</a> |
-                <a target="_blank" href="" class="keychainify-checked">Customer Suport</a> |
-                <a target="_blank" href="#" class="keychainify-checked">Terms </a> | 
-                <a target="_blank" href="#" class="keychainify-checked">Privacy</a> |
-                <a target="_blank" href="#" class="keychainify-checked">Refund</a> |
-                <!--<a target="_blank" href="http://match.fivedit.com/contact">Contact Us </a> | -->
-            <a target="_blank" href="#" class="keychainify-checked">Help Disk</a> | 
-            <a target="_blank" href="#" class="keychainify-checked">Be Safe Online</a> | 
-                <a href="#" class="keychainify-checked">Facebook</a>
+            <div class="">
+                <div class="learn-more">
+                <div class="learn-more__container container">
+                    <h2 class="learn-more__why-header slogan">Why <span class="domain-name">MFOUNDLOVE</span>?</h2>
+                    <p class="learn-more__why-text why-text">Here, you will find the person who is a <br>
+                    truly good match for you!</p>
+                        
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="b-t1-wrap">
+                                <img class="advantages-list__image desktop-only" src="<?php  echo base_url('uploads/home_page/home_banner/photo-1-xl.jpg'); ?>"  alt="Picture of match №1">
+                                <img class="advantages-list__icon" src="<?php  echo base_url('uploads/home_page/home_banner/profile.svg'); ?>" alt="Profile">
+                                <p class="advantages-list__text">
+                                <b class="dark-colored"> More than 300 000 profiles of </b> real people on our site! </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="b-t1-wrap">
+                                <img class="advantages-list__image desktop-only" src="<?php  echo base_url('uploads/home_page/home_banner/photo-2-xl.jpg'); ?>"  alt="Picture of match №2">
+                                <img class="advantages-list__icon" src="<?php  echo base_url('uploads/home_page/home_banner/filters.svg'); ?>" alt="Filters">
+                                <p class="advantages-list__text">
+                                <b class="dark-colored"> Search filters </b> — search for matches by city and interests. </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="b-t1-wrap">
+                                <img class="advantages-list__image desktop-only" src="<?php  echo base_url('uploads/home_page/home_banner/photo-3-xl.jpg'); ?>"  alt="Picture of match №3">
+                                <img class="advantages-list__icon" src="<?php  echo base_url('uploads/home_page/home_banner/safety.svg'); ?>" alt="Security">
+                                <p class="advantages-list__text">
+                                We guarantee <b class="dark-colored"> anonymity </b> and <b class="dark-colored"> security. </b> </p>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    </div>
+                    <div class="btn-complete-btn">
+                        <a class="learn-more__create-profile-btn js-create-profile-btn button-main button-main--create-profile keychainify-checked" href="#">Create profile</a>
+                    </div>
+                </div>
+                
             </div>
+
         </div>
     </div>
-    <div class="st-container banner-bottom t1-sm-contct-footer-bottom">
-        <h5>Design and Develop By  <a  class="btn-area" target="_blank" href="#">ABC.com </a>team</h5>
-    </div>
-
-
+    <footer>
+<nav class="main-nav">
+<ul>
+<li><a target="_blank" class="js-support-footer-link keychainify-checked" href="">About the Project</a></li>
+<li><a target="_blank" class="js-support-footer-link keychainify-checked" href="">Customer Support</a></li>
+<li><a href="" target="_blank" class="js-common-footer-link keychainify-checked">Tips</a></li>
+<li><a href="" target="_blank" class="js-common-footer-link keychainify-checked">Contacts</a></li>
+<li class="js-common-footer-terms hide-footer-item">
+<a href="" target="_blank" class="js-common-footer-link keychainify-checked">User Agreement</a>
+</li>
+<li class="js-common-footer-affiliate">
+<a href="" target="_blank" class="js-common-footer-link keychainify-checked">Affiliate program</a>
+</li>
+<li class="js-common-footer-affiliate-viceroi hide-footer-item">
+<a href="" target="_blank" class="js-common-footer-link keychainify-checked">Affiliate program</a>
+</li>
+<li><a href="" target="_blank" class="js-common-footer-link keychainify-checked">Privacy Policy</a></li>
+</ul>
+</nav>
+</footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
     <script>
            var owl = $('.owl-carousel');
