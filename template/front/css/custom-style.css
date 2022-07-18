@@ -455,6 +455,18 @@ a.learn-more__create-profile-btn.js-create-profile-btn.button-main.button-main--
     text-decoration: none;
     color: #fff;
 }
+.did-you-t1 {
+    color: white;
+}
+select#birth-day {
+    color: black;
+}
+select#birth-month {
+    color: black;
+}
+select#birth-year {
+    color: black;
+}
 /* sm */
 @media (max-width: 575px){
 	.top-navbar .top-navbar-menu > ul.top-menu > li > a {
