@@ -278,14 +278,16 @@ input.person-gender__input.js-gender-input {
 label.person-gender__label.js-gender-err {
     font-size: 15px;
 }
+
 .person-form__input {
-    width: 100%;
-    padding: 5px 5px 6px;
+    width: 50%;
     border: solid 1px #bfbfbf;
     border-radius: 4px;
     background-color: rgba(255,255,255,.5);
     font: inherit;
+    display: flex;
     font-size: 1rem;
+    float: left;
 }
 .person-form__content {
     width: 73%;
@@ -466,6 +468,129 @@ select#birth-month {
 }
 select#birth-year {
     color: black;
+}
+select.birth-date__input.person-form__input.person-form__input--date {
+    padding: 5px 5px 5px 26px;
+}
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .area-banner-left-form.web-loader-gf {
+    position: relative;
+}
+.loader-area{
+    display: none;
+}
+
+.loader-area {
+    position: absolute;
+   
+    background: #0000007a;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    padding: 39%;
+}
+#formSubmitTwo{
+    display: none;
+}
+/* #formSubmitOne{
+    display: none;
+} */
+input.person-form__input-email {
+    width: 100%;
+    padding: 11px;
+    border-radius: 2px;
+    border: 1px solid #dfdfdf;
+    
+}
+.person-form__item.person-gender-pass {
+    margin-bottom: 0;
+}
+select.form-control.form-control-sm.selectpicker.on_behalf {
+    padding: 5px;
+    height: 51px;
+}
+.pass-t1-re {
+    padding: 15px;
+}
+.mrgrmv{
+    margin-bottom: 5px !important;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 100;
+    right: 0;
+    top:0;
+    font-size: 17px;
+  }
+  
+  #snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {top: 0; opacity: 0;} 
+    to {top: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {top: 30px; opacity: 1;} 
+    to {top: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {top: 30px; opacity: 1;}
+    to {top: 0; opacity: 0;}
+  }
+
+  .ima-login-banner>img {
+    width: 100%;
+}
+.area-banner-left-form-login.login-web-loader-gf {
+    padding: 67px;
+}
+button.btn.btn-styled.btn-sm.btn-block.btn-base-1.z-depth-2-bottom.mt-4.lgon-t1 {
+    background: #e7087f;
+}
+.st-content-inner.t1-head-space-area-login {
+    padding: 10px 2px;
+    background: #80808040;
 }
 /* sm */
 @media (max-width: 575px){

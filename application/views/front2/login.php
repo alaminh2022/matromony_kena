@@ -78,18 +78,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<?php } ?>
 </head>
 <body>
-   
+   <?php
+    $login_image = $this->db->get_where('frontend_settings', array('type' => 'login_image'))->row()->value;
+    $login_image_data = json_decode($login_image, true);
+
+   ?>
    <div class="header">
        <!-- MAIN WRAPPER -->
         <div class="body-wrap">
             <div id="st-container" class="st-container  st-home-banner-area">
-                <div class="home_banner">
-                    <img src="<?php echo base_url('uploads/home_page/home_banner/home_banner1.jpg'); ?>" alt="">
-                </div>
+               
                 
-                <div class="st-pusher  t1-st-bg-hover">
+                <div class="st-pusher  ">
                     <div class="st-content">
-                        <div class="st-content-inner t1-head-space-area">
+                        <div class="st-content-inner t1-head-space-area-login">
                             <!-- Navbar -->
                             <div id="myHeader">
                                
@@ -123,7 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <div class="collapse navbar-collapse align-items-center justify-content-end" id="navbar_main">
                                             <!-- Navbar links -->
                                            <div class="did-you-t1">
-                                                 Are you already registered? <a href="<?php echo base_url(); ?>home/login" class="t1-login-btn-22"> LOGIN</a>
+                                                 <a href="<?php echo base_url(); ?>" class="t1-login-btn-22"> Create account</a>
                                            </div>
                                         </div>
                                     </div>
@@ -172,156 +174,112 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
                 <div class="t1-get-start-area container ">
-                    <div class="row t1-ro-bg-white">
-                    <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 t1-pa-rigt-0">
-                            <img class="sub-banner-t1" src="<?php echo base_url('uploads/home_page/home_banner/photo-desktop-m-2x.jpg'); ?>" alt="">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 t1-pad-left-0">
-                           <div class="area-banner-left-form web-loader-gf">
-                           <div class="loader-area">
-                                <div class="loader"></div>
-                           </div>
-                               
-                               <div class="t1-h2-clz">
-                                <h2 class="content__slogan slogan slogan--desktop">
-                                    Register <br>
-                                    and meet people! </h2>
-                               </div>
-                               <div class="">
-                                    <form action="<?php echo base_url(); ?>home/formSubmitOne" method="post" id="formSubmitOne">
-                                        <div class="person-form js-page js-page-1 js-active-page" data-step-id="42">
-                                            <div class="person-form__item person-gender">
-                                                <div class="person-form__container">
-                                                    <span class="label-text">I am a:</span>
-                                                <div class="person-gender__items-wrapper person-form__content">
-                                                    <div class="person-gender__item js-gender-err">
-                                                        <input class="person-gender__input js-gender-input" required type="radio" name="person-gender" id="person-male" value="1" >
-                                                        <label class="person-gender__label js-gender-err" for="person-male">Man</label>
-                                                    </div>
-                                                    <div class="person-gender__item js-gender-err">
-                                                        <input class="person-gender__input js-gender-input" required type="radio" name="person-gender" id="person-female" value="2" >
-                                                        <label class="person-gender__label js-gender-err" for="person-female">Woman</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="person-form__item person-name">
-                                            <div class="person-form__container">
-                                                <label class="label-text " for="person-name">Your name:</label>
-                                                <div class="person-name__item image-wrapper person-form__content">
-                                                    <input class="person-form__input" type="text" required name="first_name" id="person-name" placeholder="First name" >
-                                                    <input class="person-form__input" type="text" required name="last_name" id="person-name" placeholder="Last name" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="person-form__item person-birth">
-                                            <div class="person-form__container">
-                                                <span class="personal-form__label label-text">Date of <br> birth:</span>
-                                                <div class="js-input-select birth-date person-form__content">
-                                                    <select class="birth-date__input person-form__input person-form__input--date" required name="birth-day" id="birth-day">
-                                                    <option class="select-item" selected="" value="" disabled="">DD</option>
-                                                    <?php for ($i=1; $i < 31; $i++) {  ?>
-                                                        <option class="select-item" value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                    <?php } ?>
-                                                    </select>
-                                                    <select class="birth-date__input person-form__input person-form__input--date" required name="birth-month" id="birth-month">
-                                                        <option class="select-item select-item--disabled" value="" selected="" disabled="">ММ</option>
-                                                        <?php for ($i=1; $i < 13; $i++) {  ?>
-                                                            <option class="select-item" value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-                                                    <select class="birth-date__input person-form__input person-form__input--date" required name="birth-year" id="birth-year">
-                                                        <option class="select-item" selected="" value="" disabled="">YYYY</option>
-                                                        <?php for ($i=1971; $i < 2004; $i++) {  ?>
-                                                        <option class="select-item" value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                        <?php } ?>
-                                                    
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="person-form__button-main button-main js-switch-button" id="formSubmitOne_button" type="submit">Continue</button>
-                                    </form>
-                                </div>
-                                <div class>
-                                    <form action="<?php echo base_url(); ?>home/registration/add_info" method="post" id="formSubmitTwo">
-                                            <div class="person-form js-page js-page-1 js-active-page" data-step-id="42">
-                                                <div class="person-form__item person-name mrgrmv">
-                                                    <div class="person-form__container">
-                                                        <label class="label-text " for="person-name">E-mail:</label>
-                                                        <div class="person-name__item image-wrapper person-form__content">
-                                                            <input class="person-form__input-email" type="email" required name="email"  placeholder="Email" >
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="person-form__item person-name mrgrmv">
-                                                    <div class="person-form__container">
-                                                        <label class="label-text " for="person-name">Phone:</label>
-                                                        <div class="person-name__item image-wrapper person-form__content">
-                                                            <input class="person-form__input-email" type="text" required name="mobile"  placeholder="Phone" >
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="person-form__item person-name mrgrmv">
-                                                    <div class="person-form__container">
-                                                        <label class="label-text " for="person-name">On Behalf:</label>
-                                                        <div class="person-name__item image-wrapper person-form__content">
-                                                            <select name="on_behalf"  class="form-control form-control-sm selectpicker on_behalf" required data-placeholder="Choose a on_behalf" tabindex="2" data-hide-disabled="true">
-                                                                <option value="">Choose one</option>
-                                                                <option value="1">Self</option>
-                                                                <option value="2">Daughter/Son</option>
-                                                                <option value="3">Sister</option>
-                                                                <option value="4">Brother</option>
-                                                                <option value="5">Friend</option>
-                                                            </select>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?php $member_approval = $this->db->get_where('general_settings', array('type' => 'member_approval_by_admin'))->row()->value;
-                                        if($member_approval == 'yes'){ ?>
-                                            <input name="approval_status" value="pending" hidden="">
-                                        <?php } else { ?>
-                                            <input name="approval_status" value="approved" hidden="">
-                                    <?php } ?>
-                                                <div class="person-form__item person-gender-pass">
-                                                    <div class="person-form__container">
-                                                        <span class="label-text">Password:</span>
-                                                        <div class="person-gender__items-wrapper person-form__content">
-                                                            <div class="person-gender__item js-gender-err">
-                                                                <input type="password" class="form-control form-control-sm pass-t1-re" required name="password" placeholder="Password">
-                                                            </div>
-                                                            <div class="person-gender__item js-gender-err">
-                                                                <input type="password" class="form-control form-control-sm pass-t1-re pass-t1-re1" required name="confirm_password" placeholder="Confirm Password">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="person-form__button-main button-main js-switch-button" id="formSubmitTwo_button" type="submit">Continue</button>
-                                        
-                                        </form>
-                                </div>
-                            </div>
-                                
 
-                                <div class="banners-block">
-                                    <div class="banners-block__wrapper">
-                                    <?php  if (file_exists('uploads/header_logo/'.$header_logo[0]['image'])) {
+                    <div class="row t1-ro-bg-white">
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 t1-pad-left-0">
+                            <div class="area-banner-left-form-login login-web-loader-gf">
+                                <div class="loader-area">
+                                        <div class="loader"></div>
+                                </div>
+                            
+                                <div class="t1-h2-clz">
+                                    <h2 class="content__slogan slogan slogan--desktop">
+                                    Welcome back! <br>
+                                        </h2>
+                                </div>
+                                <div class="">
+                                <div class="">
+                                    <div class="form-body">
+                                        <div class="text-center px-2">
+                                          
+                                            <?php
+                                                if (!empty($register_success)) {
                                                 ?>
-                                                    <img src="<?=base_url()?>uploads/header_logo/<?=$header_logo[0]['image']?>" class="img-responsive c100px" height="100%">
+                                                    <p class="text-success"><?=$register_success?></p>
                                                 <?php
                                                 }
-                                                else {
+                                            ?>
+                                        </div>
+                                        <form class="form-default" role="form" method="post" action="<?=base_url()?>home/check_login">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="text-uppercase font_light"><?php echo translate('email')?></label>
+                                                        <input type="email" placeholder="E-mail" class="form-control input-sm" name="email" id="inp_usr_nm" autofocus required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="text-uppercase font_light"><?php echo translate('password')?></label>
+                                                        <input type="password" placeholder="Password" class="form-control input-sm" name="password" id="inp_pass" required>
+                                                    </div>
+                                                    <p style="color: red">
+                                                        <?php
+                                                            if (!empty($login_error)){
+                                                                echo $login_error;
+                                                            }
+                                                        ?>
+                                                    </p>
+                                                    <p style="color: green">
+                                                        <?php
+                                                            if (!empty($sent_email)){
+                                                                echo $sent_email;
+                                                            }
+                                                        ?>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-styled btn-sm btn-block btn-base-1 z-depth-2-bottom mt-4 lgon-t1"><?php echo translate('log_in')?></button>
+                                            <div class="row pt-3">
+                                                <div class="col-6" style="font-size: 12px;">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" name="remember_me" id="remember_me" value="checked">
+                                                        <label for="remember_me"><span class="c-gray-light"><?php echo translate('remember_me')?></span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 text-right" style="font-size: 12px;">
+                                                    <!-- <a href="<?=base_url()?>home/forget_pass" class="c-gray-light"><?php echo translate('recover_password')?></a> -->
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="row">
+                                            <div class="col-12 text-center" style="font-size: 12px;">
+                                                <span class="c-gray-light"><?php echo translate('new_here?')?></span><a class="c-gray-light" href="<?=base_url()?>home"> <u><?php echo translate('create_an_account_from_here!')?></u></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php if(demo()){ ?>
+                                    <div class="form-card form-card--style-2 z-depth-3-top mt-5">
+                                    <div class="form-body">
+                                        <div class="text-center px-2">
+                                            <h4 class="heading heading-4 strong-400 mb-4 font_light"><?php echo translate('sign_in_details')?></h4>
+                                            <?php
+                                                if (!empty($register_success)) {
                                                 ?>
-                                                    <img src="<?=base_url()?>uploads/header_logo/default_image.png" class="img-responsive c100px" height="100%">
+                                                    <p class="text-success"><?=$register_success?></p>
                                                 <?php
-                                                } ?>
+                                                }
+                                            ?>
+                                        </div>
+                                        <div class="text-center">
+                                            <p style="color:#ccc;"><b>Username:</b> <span id="usr_nm">user@gmail.com</span></p>
+                                            <p style="color:#ccc;"><b>Password:</b> <span id="pass">1234</span></p>
+                                            <button type="button" class="btn btn-styled btn-sm btn-block btn-base-1 z-depth-2-bottom mt-4 cpy_btn"><?=translate('copy')?></button>
+                                        </div>
+                                    </div>
                                 </div>
-                                    <a class="banners-block__text js-why-link keychainify-checked" href="#">Why us?</a>
+                                <?php } ?>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 t1-pa-rigt-0">
+                            <div class="ima-login-banner">
+                                <img src="<?=base_url()?>uploads/login_image/<?=$login_image_data[0]['image']?>" alt="">
                             </div>
                         </div>
                         
@@ -333,53 +291,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     </div>
    
-    <div class="st-container">
-        <div class="container">
-            <div class="">
-                <div class="learn-more">
-                <div class="learn-more__container container">
-                    <h2 class="learn-more__why-header slogan">Why <span class="domain-name">MFOUNDLOVE</span>?</h2>
-                    <p class="learn-more__why-text why-text">Here, you will find the person who is a <br>
-                    truly good match for you!</p>
-                        
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="b-t1-wrap">
-                                <img class="advantages-list__image desktop-only" src="<?php  echo base_url('uploads/home_page/home_banner/photo-1-xl.jpg'); ?>"  alt="Picture of match №1">
-                                <img class="advantages-list__icon" src="<?php  echo base_url('uploads/home_page/home_banner/profile.svg'); ?>" alt="Profile">
-                                <p class="advantages-list__text">
-                                <b class="dark-colored"> More than 300 000 profiles of </b> real people on our site! </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="b-t1-wrap">
-                                <img class="advantages-list__image desktop-only" src="<?php  echo base_url('uploads/home_page/home_banner/photo-2-xl.jpg'); ?>"  alt="Picture of match №2">
-                                <img class="advantages-list__icon" src="<?php  echo base_url('uploads/home_page/home_banner/filters.svg'); ?>" alt="Filters">
-                                <p class="advantages-list__text">
-                                <b class="dark-colored"> Search filters </b> — search for matches by city and interests. </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="b-t1-wrap">
-                                <img class="advantages-list__image desktop-only" src="<?php  echo base_url('uploads/home_page/home_banner/photo-3-xl.jpg'); ?>"  alt="Picture of match №3">
-                                <img class="advantages-list__icon" src="<?php  echo base_url('uploads/home_page/home_banner/safety.svg'); ?>" alt="Security">
-                                <p class="advantages-list__text">
-                                We guarantee <b class="dark-colored"> anonymity </b> and <b class="dark-colored"> security. </b> </p>
-                            </div>
-                        </div>
-                    </div>
-
-                   
-                    </div>
-                    <div class="btn-complete-btn">
-                        <a class="learn-more__create-profile-btn js-create-profile-btn button-main button-main--create-profile keychainify-checked" href="#">Create profile</a>
-                    </div>
-                </div>
-                
-            </div>
-
-        </div>
-    </div>
+   
     <footer>
 <nav class="main-nav">
 <ul>
@@ -548,50 +460,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             });
         }, 500); // <-- time in milliseconds
     }
-    var dataX={};
-    $(document).ready(function(){
-        $('#formSubmitOne').submit(function(){
-            $('.loader-area').css({display:"block"});
-            $.ajax({
-                type:"POST",
-                url:$('#formSubmitOne').attr('action'),
-                data:$('#formSubmitOne').serialize(),
-                dataType:"json",
-                success:function(response){
-                    dataX =response
-                    $('.loader-area').css({display:"none"});
-                    $('#formSubmitOne').css({display:"none"});
-                    $('#formSubmitTwo').css({display:"block"});
-                }
-            });
-            return false;
-        });
-        $('#formSubmitTwo').submit(function(){
-            
-            var d = $('#formSubmitTwo').serialize();
-            const tt = new URLSearchParams(dataX).toString();
-            $('.loader-area').css({display:"block"});
-            $.ajax({
-                type:"POST",
-                url:$('#formSubmitTwo').attr('action'),
-                data:d+'&'+tt,
-                dataType:"json",
-                success:function(response){
-                    if(response.status){
-                        myFunction(response.msg);
-                        window.location.href= '<?php echo base_url(); ?>home/login';
-                    }else{
-                        myFunctionError(response.msg);
-                    }
-                    
-                    $('.loader-area').css({display:"none"});
-                    
-                }
-            });
-            return false;
-        });
-        
-    });
+   
     function myFunction(data) {
        
         var x = document.getElementById("snackbar");

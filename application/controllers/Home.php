@@ -73,6 +73,38 @@ class Home extends CI_Controller {
         $page_data['page_url'] = "";
         $this->load->view('front2/index', $page_data);
     }
+    public function formSubmitOne()
+    {
+        $last_name = $this->input->post('last_name');
+        $first_name = $this->input->post('first_name');
+       
+        $gender = $this->input->post('person-gender');
+        $day = $this->input->post('birth-day');
+        $month =$this->input->post('birth-month');
+        $year = $this->input->post('birth-year');
+        $data['first_name']=$first_name;
+        $data['last_name']= $last_name;
+        $data['gender'] = $gender;
+        $date = $year.'-'.sprintf("%02d", $month).'-'.sprintf("%02d", $day);
+        $data['date_of_birth']= strtotime($date);
+        $this->session->set_userdata(array('signup1'=>$data));
+        $signup1 =$this->session->userdata['signup1'];
+        echo json_encode($signup1);
+    }
+    public function formSubmitTwo()
+    {
+        $data =$this->session->userdata['signup1'];
+        $data['email'] = $this->input->post('email');
+        $data['phone'] = $this->input->post('phone');
+        $on_behalf = $this->input->post('on_behalf');
+        $password = $this->input->post('password');
+        $confirm_password = $this->input->post('confirm_password');
+
+        
+       
+        
+        echo json_encode($data);
+    }
 
     function member_permission()
     {
@@ -3753,6 +3785,7 @@ class Home extends CI_Controller {
         else{
             $page_data['page'] = "login";
             $page_data['login_error'] = "";
+            $page_data['top'] = "login.php";
             if ($this->session->flashdata('alert') == "login_error") {
                 $page_data['login_error'] = translate('your_email_or_password_is_invalid!');
             }
@@ -3787,7 +3820,7 @@ class Home extends CI_Controller {
                 $page_data['login_error'] = translate('something_went_wrong');
             }
 
-            $this->load->view('front/login', $page_data);
+            $this->load->view('front2/login', $page_data);
         }
     }
 
@@ -4103,9 +4136,13 @@ class Home extends CI_Controller {
                     if ($this->Crud_model->get_settings_value('third_party_settings', 'captcha_status', 'value') == 'ok') {
                         $page_data['recaptcha_html'] = $this->recaptcha->render();
                     }
-                    $page_data['page'] = "registration";
-                    $page_data['form_contents'] = $this->input->post();
-                    $this->load->view('front/registration', $page_data);
+                    // $page_data['page'] = "registration";
+                    // $page_data['form_contents'] = $this->input->post();
+                    // $this->load->view('front/registration', $page_data);
+                    echo json_encode(array(
+                        'status'=>false,
+                        'msg'=>validation_errors()
+                    ));
                 }
                 else {
                     if ($safe == 'yes') {
@@ -4341,7 +4378,7 @@ class Home extends CI_Controller {
                                 } else {
                                     $data['email_verification_status'] = '1';
                                 }
-                                $data['date_of_birth'] = strtotime($this->input->post('date_of_birth'));
+                                $data['date_of_birth'] = $this->input->post('date_of_birth');
                                 $data['height'] = 0.00;
                                 $data['mobile'] = $this->input->post('mobile');
                                 $data['password'] = sha1($this->input->post('password'));
@@ -4403,8 +4440,14 @@ class Home extends CI_Controller {
                                         $this->Email_model->member_email_verification('member', $data['email'], $data['email_verification_code']);
                                     }
                                     $this->Email_model->member_registration_email_to_admin($insert_id);
-                                    $this->session->set_flashdata('alert', 'register_success');
-                                    redirect(base_url().'home/login_msg', 'refresh');
+                                    echo json_encode(array(
+                                        'status'=>true,
+                                        'member_email_verification'=>$member_email_verification,
+                                        'msg'=>'registration success'
+                                    ));
+
+                                    // $this->session->set_flashdata('alert', 'register_success');
+                                    // redirect(base_url().'home/login_msg', 'refresh');
                                 }
                                 else{
                                     if ($this->Email_model->account_opening_member_approval_off('member', $data['email'], $this->input->post('password')) == true) {
@@ -4414,11 +4457,21 @@ class Home extends CI_Controller {
                                         $this->Email_model->member_email_verification('member', $data['email'], $data['email_verification_code']);
                                     }
                                     $this->Email_model->member_registration_email_to_admin($insert_id);
-                                    $this->session->set_flashdata('alert', 'register_success');
+                                    // $this->session->set_flashdata('alert', 'register_success');
                                     if($member_email_verification == 'on'){
-                                        redirect(base_url().'home/email_verification_msg', 'refresh');
+                                        echo json_encode(array(
+                                            'status'=>true,
+                                            'member_email_verification'=>$member_email_verification,
+                                            'msg'=>'registration success'
+                                        ));
+                                        // redirect(base_url().'home/email_verification_msg', 'refresh');
                                     }
-                                    redirect(base_url().'home/login', 'refresh');
+                                    echo json_encode(array(
+                                        'status'=>true,
+                                        'member_email_verification'=>$member_email_verification,
+                                        'msg'=>'registration success'
+                                    ));
+                                    // redirect(base_url().'home/login', 'refresh');
                                 }
 
                             }
@@ -4444,7 +4497,7 @@ class Home extends CI_Controller {
                             } else {
                                 $data['email_verification_status'] = '1';
                             }
-                            $data['date_of_birth'] = strtotime($this->input->post('date_of_birth'));
+                            $data['date_of_birth'] = $this->input->post('date_of_birth');
                             $data['height'] = 0.00;
                             $data['mobile'] = $this->input->post('mobile');
                             $data['password'] = sha1($this->input->post('password'));
@@ -4508,8 +4561,14 @@ class Home extends CI_Controller {
                                 }
                                 $this->Email_model->member_registration_email_to_admin($insert_id);
 
-                                $this->session->set_flashdata('alert', 'register_success');
-                                redirect(base_url().'home/login_msg', 'refresh');
+                                echo json_encode(array(
+                                    'status'=>true,
+                                    'member_email_verification'=>$member_email_verification,
+                                    'msg'=>'Registration success'
+                                ));
+
+                                // $this->session->set_flashdata('alert', 'register_success');
+                                // redirect(base_url().'home/login_msg', 'refresh');
                             } else {
                                 if ($this->Email_model->account_opening_member_approval_off('member', $data['email'], $this->input->post('password')) == true) {
                                     $msg = 'done_and_sent';
@@ -4519,11 +4578,21 @@ class Home extends CI_Controller {
                                 }
                                 $this->Email_model->member_registration_email_to_admin($insert_id);
 
-                                $this->session->set_flashdata('alert', 'register_success');
+                                // $this->session->set_flashdata('alert', 'register_success');
                                 if($member_email_verification == 'on'){
-                                    redirect(base_url().'home/email_verification_msg', 'refresh');
+                                    echo json_encode(array(
+                                        'status'=>true,
+                                        'member_email_verification'=>$member_email_verification,
+                                        'msg'=>'Registration success'
+                                    ));
+                                    // redirect(base_url().'home/email_verification_msg', 'refresh');
                                 }
-                                redirect(base_url().'home/login', 'refresh');
+                                echo json_encode(array(
+                                    'status'=>true,
+                                    'member_email_verification'=>$member_email_verification,
+                                    'msg'=>'Registration success'
+                                ));
+                                // redirect(base_url().'home/login', 'refresh');
                             }
                         }
                     }
