@@ -8,7 +8,7 @@ foreach ($get_all_members as $member): ?>
     <?php
         $image = json_decode($member->profile_image, true);
     ?>
-    <div class="block block--style-3 list z-depth-1-top" id="block_<?=$member->member_id?>">
+    <div class="block block--style-3 list z-depth-1-top col-md-4" id="block_<?=$member->member_id?>">
         <div class="block-image">
             <a onclick="return goto_profile(<?=$member->member_id?>)">
                     <?php

@@ -8,7 +8,7 @@
 </style>
 <div class="hidden_xs">
     <nav class="navbar navbar-expand-lg  navbar--style-1 navbar-light bg-default navbar--shadow navbar--uppercase profile-nav">
-        <div class="container navbar-container">
+        <div class="container-fluid navbar-container">
             <!-- Brand/Logo -->
             
             <div class="d-inline-block">

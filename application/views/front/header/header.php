@@ -6,112 +6,22 @@
                 <div class="st-content-inner">
 					<!-- Navbar -->
 					<div id="myHeader">
-						<div class="top-navbar align-items-center">
-						    <div class="container">
-						        <div class="row align-items-center py-1" style="padding-bottom: 0px !important">
-						            <div class="col-lg-4 col-md-4 col">
-	                                    <nav class="top-navbar-menu" style="margin:0px !important;">
-	                                        <ul class="top-menu" style="float: left !important;width: 40%;">
-	                                            <li class="aux-languages dropdown">
-		                                            <a class="pt-0 pb-0">
-		                                            	<?php
-						                                    if ($set_lang = $this->session->userdata('language')) {
-
-						                                    } else {
-						                                        $set_lang = $this->db->get_where('general_settings', array('type' => 'language'))->row()->value;
-						                                    }
-						                                    $lid = $this->db->get_where('site_language_list', array('db_field' => $set_lang))->row()->site_language_list_id;
-						                                    $lnm = $this->db->get_where('site_language_list', array('db_field' => $set_lang))->row()->name;
-						                                ?>
-		                                            	<img src="<?=base_url()?>uploads/language_list_image/language_<?=$lid?>.jpg" style="width: 20px;margin-top: -2px">
-		                                            	<span><?=$lnm?></span>
-		                                            </a>
-	                                                <ul id="auxLanguages" class="sub-menu">
-	                                                	<?php
-						                                    $langs = $this->db->get_where('site_language_list', array('status' => 'ok'))->result_array();
-						                                    foreach ($langs as $row) {
-						                                ?>
-						                                    <li <?php if ($set_lang == $row['db_field']) { ?>class="active"<?php } ?> >
-						                                        <a class="set_langs" data-href="<?php echo base_url(); ?>home/set_language/<?php echo $row['db_field']; ?>">
-						                                            <img src="<?=base_url()?>uploads/language_list_image/language_<?=$row['site_language_list_id']?>.jpg" width="20px">
-			                                                    	<span class="language"><?=$row['name']?></span>
-						                                            <?php if ($set_lang == $row['db_field']) { ?>
-						                                                <i class="fa fa-check"></i>
-						                                            <?php } ?>
-						                                        </a>
-						                                    </li>
-						                                <?php
-						                                    }
-						                                ?>
-	                                                </ul>
-	                                            </li>
-	                                        </ul>
-	                                        <ul class="top-menu" style="float: left !important;width: 60%;">
-	                                            <li class="aux-languages dropdown">
-		                                            <a class="pt-0 pb-0">
-		                                            	<?php
-								                            if($currency_id = $this->session->userdata('currency')){} else {
-								                                $currency_id = $this->db->get_where('business_settings', array('type' => 'currency'))->row()->value;
-								                            }
-								                            $symbol = $this->db->get_where('currency_settings',array('currency_settings_id'=>$currency_id))->row()->symbol;
-								                            $c_name = $this->db->get_where('currency_settings',array('currency_settings_id'=>$currency_id))->row()->name;
-								                        ?>
-								                        <span><?=$c_name.' ('.$symbol.')'?></span>
-		                                            </a>
-	                                                <ul id="auxLanguages" class="sub-menu">
-	                                                	<?php
-								                            $currencies = $this->db->get_where('currency_settings',array('status'=>'ok'))->result_array();
-								                            foreach ($currencies as $row)
-								                            {
-								                        ?>
-								                            <li <?php if($currency_id == $row['currency_settings_id']){ ?>class="active"<?php } ?> >
-								                                <a class="set_langs" data-href="<?php echo base_url(); ?>home/set_currency/<?php echo $row['currency_settings_id']; ?>">
-								                                    <?php echo $row['name']; ?> (<?php echo $row['symbol']; ?>)
-								                                    <?php if($currency_id == $row['currency_settings_id']){ ?>
-								                                        <i class="fa fa-check"></i>
-								                                    <?php } ?>
-								                                </a>
-								                            </li>
-								                        <?php
-								                            }
-								                        ?>
-	                                                </ul>
-	                                            </li>
-	                                        </ul>
-	                                    </nav>
-									</div>
-                                    <?php if(demo()){ ?>
-                                        <div class="col-lg-4 col-md-4 text-center" style="padding: 0px">
-    										<i class="text-danger blink_me fa fa-exclamation-triangle"></i> <span style="font-size: 11px; line-height: 1px !important;">For Demo purpose all image uploads are DISABLED</span>
-    									</div>
-                                        <div class="col-lg-4 col-md-4 col">
-                                    <?php }else{ ?>
-                                    <div class="col-lg-8 col-md-4 col">
-                                    <?php } ?>
-						                <nav class="top-navbar-menu">
-							                <ul class="float-right top_bar_right">
-
-							                </ul>
-						                </nav>
-						            </div>
-						        </div>
-						    </div>
-						</div>
+						
 						<nav class="navbar navbar-expand-lg navbar-light bg-default navbar--link-arrow navbar--uppercase">
-						    <div class="container navbar-container">
+						    <div class="container-fluid navbar-container">
 						        <!-- Brand/Logo -->
-						        <a class="navbar-brand" href="<?=base_url()?>home/">
+						        <a class="navbar-brand" href="<?=base_url()?>Dashboard">
 						        	<?php
 						        		$header_logo_info = $this->db->get_where('frontend_settings', array('type' => 'header_logo'))->row()->value;
 	                                    $header_logo = json_decode($header_logo_info, true);
 	                                    if (file_exists('uploads/header_logo/'.$header_logo[0]['image'])) {
 	                                    ?>
-	                                        <img src="<?=base_url()?>uploads/header_logo/<?=$header_logo[0]['image']?>" class="img-responsive" height="100%">
+	                                        <img src="<?=base_url()?>uploads/header_logo/<?=$header_logo[0]['image']?>" class="img-responsive c100px" height="100%">
 	                                    <?php
 	                                    }
 	                                    else {
 	                                    ?>
-	                                        <img src="<?=base_url()?>uploads/header_logo/default_image.png" class="img-responsive" height="100%">
+	                                        <img src="<?=base_url()?>uploads/header_logo/default_image.png" class="img-responsive c100px" height="100%">
 	                                    <?php
 	                                    }
 	                                ?>
@@ -128,7 +38,7 @@
 						            <!-- Navbar links -->
 						            <ul class="navbar-nav" data-hover="dropdown">
 						                <li class="custom-nav">
-						                <a class="nav-link <?php if($page == 'home'){?>nav_active<?php }?>" href="<?=base_url()?>home" aria-haspopup="true" aria-expanded="false">
+						                <a class="nav-link <?php if($page == 'home'){?>nav_active<?php }?>" href="<?=base_url()?>Dashboard" aria-haspopup="true" aria-expanded="false">
 						                <?php echo translate('home')?></a>
 										</li>
 										<!-- <li class="custom-nav"><a class="nav-link " href="about.php" aria-haspopup="true" aria-expanded="false">About</a></li> -->
@@ -155,16 +65,18 @@
 						                <a class="nav-link <?php if($page == 'plans' || $page == 'subscribe'){?>nav_active<?php }?>" href="<?=base_url()?>home/plans" aria-haspopup="true" aria-expanded="false">
 						                <?php echo translate('premium_plans')?></a>
 						                </li>
-						                <li class="custom-nav">
+						                <!-- <li class="custom-nav">
 						                <a class="nav-link <?php if($page == 'stories' || $page == 'story_detail'){?>nav_active<?php }?>" href="<?=base_url()?>home/stories" aria-haspopup="true" aria-expanded="false">
 						                <?php echo translate('happy_stories')?></a>
-										</li>
+										</li> -->
 										<!-- <li class="custom-nav"><a class="nav-link " href="#" aria-haspopup="true" aria-expanded="false">Career</a></li> -->
 						                <li class="custom-nav">
 						                <a class="nav-link <?php if($page == 'contact_us'){?>nav_active<?php }?>" href="<?=base_url()?>home/contact_us" aria-haspopup="true" aria-expanded="false">
 						                <?php echo translate('contact_us')?></a>
 						                </li>
+										<?php require 'top_bar_right.php'; ?>
 						            </ul>
+									
 						        </div>
 						    </div>
 						</nav>

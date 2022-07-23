@@ -592,6 +592,14 @@ button.btn.btn-styled.btn-sm.btn-block.btn-base-1.z-depth-2-bottom.mt-4.lgon-t1 
     padding: 10px 2px;
     background: #80808040;
 }
+nav.navbar.navbar-expand-lg.navbar-light.bg-default.navbar--link-arrow.navbar--uppercase {
+    background: none;
+    border: 0;
+}
+.stk-ck-t1.sticky-header {
+    background: #837b7bb3;
+    padding: 9px;
+}
 /* sm */
 @media (max-width: 575px){
 	.top-navbar .top-navbar-menu > ul.top-menu > li > a {

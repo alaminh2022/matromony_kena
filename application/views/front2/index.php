@@ -91,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="st-content">
                         <div class="st-content-inner t1-head-space-area">
                             <!-- Navbar -->
-                            <div id="myHeader">
+                            <div id="myHeader" class="stk-ck-t1">
                                
                                 <nav class="navbar navbar-expand-lg navbar-light bg-default navbar--link-arrow navbar--uppercase">
                                     <div class="container navbar-container">

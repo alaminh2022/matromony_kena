@@ -1,7 +1,7 @@
 <?php include_once APPPATH.'views/front/profile/profile_nav.php';?>
 <section class="slice sct-color-2">
     <div class="profile">
-        <div class="container">
+        <div class="container-fluid">
             <?php //foreach ($get_member as $member): ?>
                 <div class="row cols-md-space cols-sm-space cols-xs-space">
                     <?php if (!empty($success_alert)): ?>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <!-- Alerts for Member actions -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <?php include_once APPPATH.'views/front/profile/left_panel.php';?>
                     </div>
 

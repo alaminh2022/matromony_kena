@@ -1,5 +1,5 @@
 <script src="<?=base_url()?>template/front/js/jquery.inputmask.bundle.min.js"></script>
-<div class="col-lg-4 size-sm">
+<div class="col-lg-3 size-sm">
     <div class="sidebar">
         <div class="">
             <div class="card">

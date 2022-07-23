@@ -7,7 +7,7 @@
 
 </style>
 <section class="page-title page-title--style-1">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-12 text-center">
                 <h2 class="heading heading-3 strong-400 mb-0"><?php echo translate('active_members')?></h2>
@@ -16,17 +16,17 @@
     </div>
 </section>
 <section class="slice sct-color-1">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
 			<?php  $advance_search_position = $this->db->get_where('frontend_settings', array('type' => 'advance_search_position'))->row()->value;
 
             if($advance_search_position=='left'){
                 include_once'filter.php'; ?>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
 
                     <input type="hidden" id="member_type" value="<?php if(!empty($member_type)){echo $member_type;}?>">
 
-                    <div class="block-wrapper" id="result">
+                    <div class="block-wrapper row" id="result">
                         <!-- Loads List Data with Ajax Pagination -->
                     </div>
                     <div id="pagination" style="float: right;">
@@ -34,11 +34,11 @@
                     </div>
                 </div>
             <?php }else{ ?>
-                 <div class="col-lg-8">
+                 <div class="col-lg-9">
 
                     <input type="hidden" id="member_type" value="<?php if(!empty($member_type)){echo $member_type;}?>">
 
-                    <div class="block-wrapper" id="result">
+                    <div class="block-wrapper row" id="result">
                         <!-- Loads List Data with Ajax Pagination -->
                     </div>
                     <div id="pagination" style="float: right;">
