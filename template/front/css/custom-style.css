@@ -600,6 +600,18 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-default.navbar--link-arrow.navbar--u
     background: #837b7bb3;
     padding: 9px;
 }
+a.lgn-btn-home {
+    position: absolute;
+    bottom: 125px;
+    right: 32px;
+    background: #0100fe;
+    color: white;
+    padding: 2px 23px;
+}
+a.lgn-btn-home.regi-btn-lg {
+    bottom: 95px !important;
+    right: 2px !important;
+}
 /* sm */
 @media (max-width: 575px){
 	.top-navbar .top-navbar-menu > ul.top-menu > li > a {

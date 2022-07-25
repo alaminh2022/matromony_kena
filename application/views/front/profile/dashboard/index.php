@@ -92,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <div class="widget">
                             <div class="card z-depth-2-top" id="profile_load">
                                 <div class="card-title">

@@ -241,6 +241,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             </div>
                                         </div>
                                         <button class="person-form__button-main button-main js-switch-button" id="formSubmitOne_button" type="submit">Continue</button>
+                                        <a href="<?php  echo base_url('home/login'); ?>" class="lgn-btn-home">Login</a>
                                     </form>
                                 </div>
                                 <div class>
@@ -300,8 +301,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="person-form__button-main button-main js-switch-button" id="formSubmitTwo_button" type="submit">Continue</button>
-                                        
+                                            <button class="person-form__button-main button-main js-switch-button" id="formSubmitTwo_button" type="submit">Register</button>
+                                            <a href="<?php  echo base_url('home/login'); ?>" class="lgn-btn-home regi-btn-lg">Login</a>
+                                   
                                         </form>
                                 </div>
                             </div>
