@@ -1,6 +1,6 @@
 <section class="slice sct-color-2">
     <div class="profile">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row cols-md-space cols-sm-space cols-xs-space">
                 <!-- Alerts for Member actions -->
                 <div class="col-lg-3 col-md-4" id="success_alert" style="display: none; position: fixed; top: 15px; right: 0; z-index: 9999">
@@ -66,10 +66,10 @@
                     $privacy_status = $this->Crud_model->get_type_name_by_id('member', $get_member[0]->member_id, 'privacy_status');
                     $privacy_status_data = json_decode($privacy_status, true);
                 ?>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <?php include_once APPPATH.'views/front/member_profile/left_panel.php';?>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                 	<div class="row">
                     	<div class="col-lg-12">
                         	<div class="feature feature--boxed-border feature--bg-1 mb-4 z-depth-2-top" style="padding: 0.8rem 0.8rem;">

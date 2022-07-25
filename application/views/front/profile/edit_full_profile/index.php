@@ -2,13 +2,13 @@
 <?php include_once APPPATH.'views/front/profile/profile_nav.php';?>
 <section class="slice sct-color-2">
     <div class="profile">
-        <div class="container">
+        <div class="container-fluid">
             <?php foreach ($get_member as $member): ?>
                 <div class="row cols-md-space cols-sm-space cols-xs-space">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <?php include_once APPPATH.'views/front/profile/left_panel.php';?>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <?php
                             $basic_info = $this->Crud_model->get_type_name_by_id('member', $this->session->userdata['member_id'], 'basic_info');
                             $basic_info_data = json_decode($basic_info, true);

@@ -4208,7 +4208,7 @@ a > .block {
   border-radius: 100%; }
 
 .block--style-3.list .block-image {
-  display: table-cell;
+  /* display: table-cell; */
   /* vertical-align: middle; */
   width: 220px;
   position: relative;
@@ -12196,7 +12196,11 @@ section.ss-slice::after {
 
 .timeline-item.first .timeline-info {
   padding-top: 20px; }
-
+  /*ddddddd----------custom*/
+  ul.inline-links.inline-links--style-3.custm-t1-member>li>a {
+    font-size: 16px;
+    color: #ea4f68;
+}
 @media screen and (min-width: 760px) {
   .timeline-item .timeline-info {
     float: left;

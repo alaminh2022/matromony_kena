@@ -8,7 +8,7 @@ foreach ($get_all_members as $member): ?>
     <?php
         $image = json_decode($member->profile_image, true);
     ?>
-    <div class="block block--style-3 list z-depth-1-top col-md-4" id="block_<?=$member->member_id?>">
+    <div class="block block--style-3 list z-depth-1-top col-md-3" id="block_<?=$member->member_id?>">
         <div class="block-image">
             <a onclick="return goto_profile(<?=$member->member_id?>)">
                     <?php
@@ -70,11 +70,11 @@ foreach ($get_all_members as $member): ?>
                     </span>
                 </a>
             <?php endif ?>
-            <h3 class="heading heading-5 strong-500 <?php if($member->membership == 1){echo 'mt-4';} else {echo'mt-1';}?>">
+            <h3 class="heading heading-5 strong-500 <?php if($member->membership == 1){echo 'mt-1';} else {echo'mt-1';}?>">
                 <a onclick="return goto_profile(<?=$member->member_id?>)" class="c-base-1"><?=$member->first_name." ".$member->last_name?></a>
             </h3>
             <h4 class="heading heading-xs c-gray-light text-uppercase strong-400"><?=$education_and_career_data[0]['occupation']?></h4>
-            <table class="table-striped table-bordered mb-2" style="font-size: 12px;">
+            <!-- <table class="table-striped table-bordered mb-2" style="font-size: 12px;">
                 <tr>
                     <td height="30" style="padding-left: 5px;" class="font-dark"><b><?php echo translate('Member ID')?></b></td>
                     <td height="30" style="padding-left: 5px;" class="font-dark" colspan="3"><a onclick="return goto_profile(<?=$member->member_id?>)" class="c-base-1"><b><?=$member->member_profile_id?></b></a></td>
@@ -107,15 +107,15 @@ foreach ($get_all_members as $member): ?>
                     <td width="120" height="30" style="padding-left: 5px;" class="font-dark"><b><?php echo translate('location')?></b></td>
                     <td colspan="3" height="30" style="padding-left: 5px;" class="font-dark"><?php if($present_address_data[0]['country']){echo $this->Crud_model->get_type_name_by_id('state', $present_address_data[0]['state']).', '.$this->Crud_model->get_type_name_by_id('country', $present_address_data[0]['country']);}?></td>
                 </tr>
-            </table>
+            </table> -->
         </div>
         <div class="block-footer b-xs-top">
             <div class="row align-items-center">
                 <div class="col-sm-12 text-center">
-                    <ul class="inline-links inline-links--style-3">
+                    <ul class="inline-links inline-links--style-3 custm-t1-member">
                         <li class="listing-hover">
                             <a onclick="return goto_profile(<?=$member->member_id?>)">
-                                <i class="fa fa-id-card"></i><?php echo translate('full_profile')?>
+                                <i class="fa fa-id-card"></i><?php //echo translate('full_profile')?>
                             </a>
                         </li>
                         <?php
@@ -149,7 +149,8 @@ foreach ($get_all_members as $member): ?>
                                 ?>
                                 <a id="interest_a_<?=$member->member_id?>" <?php if ($interest_onclick == 1){?>onclick="return confirm_interest(<?=$member->member_id?>)"<?php }?> style="<?=$interest_style?>">
                                     <span id="interest_<?=$member->member_id?>" class="<?=$interest_class?>">
-                                       <i class="fa fa-heart"></i> <?=$interest_text?>
+                                       <i class="fa fa-heart"></i>
+                                        <!-- <?=$interest_text?> -->
                                     </span>
                                 </a>
                             </li>
@@ -187,7 +188,8 @@ foreach ($get_all_members as $member): ?>
                                         if ($shortlist_onclick == 1){?>onclick="return do_shortlist(<?=$member->member_id?>)"<?php }
                                         elseif ($shortlist_onclick == 0) {?>onclick="return remove_shortlist(<?=$member->member_id?>)"<?php }?> style="<?=$shortlist_style?>">
                                     <span id="shortlist_<?=$member->member_id?>" class="<?=$shortlist_class?>">
-                                       <i class="fa fa-list-ul"></i> <?=$shortlist_text?>
+                                       <i class="fa fa-list-ul"></i> 
+                                       <!-- <?=$shortlist_text?> -->
                                     </span>
                                 </a>
                             </li>
@@ -221,13 +223,14 @@ foreach ($get_all_members as $member): ?>
                                         if ($followed_onclick == 1){?>onclick="return do_follow(<?=$member->member_id?>)"<?php }
                                         elseif ($followed_onclick == 0){?>onclick="return do_unfollow(<?=$member->member_id?>)"<?php }?> style="<?=$followed_style?>">
                                     <span id="followed_<?=$member->member_id?>" class="<?=$followed_class?>">
-                                        <i class="fa fa-star"></i> <?=$followed_text?>
+                                        <i class="fa fa-star"></i> 
+                                        <!-- <?=$followed_text?> -->
                                     </span>
                                 </a>
                             </li>
                             <li class="listing-hover">
                                 <a onclick="return confirm_ignore(<?=$member->member_id?>)">
-                                    <i class="fa fa-ban"></i><?php echo translate('ignore')?>
+                                    <i class="fa fa-ban"></i><?php //echo translate('ignore')?>
                                 </a>
                             </li>
                             <li class="listing-hover">
@@ -265,7 +268,8 @@ foreach ($get_all_members as $member): ?>
                                             if ($report_type == 1){?>onclick="return do_report(<?=$member->member_id?>)"<?php }
                                             elseif ($report_type == 0) {?>onclick="return is_reported(<?=$member->member_id?>)"<?php }?> style="<?=$report_style?>">
                                         <span id="report_<?=$member->member_id?>" class="<?=$report_class?>">
-                                           <i class="fa fa-odnoklassniki"></i> <?=$report_text?>
+                                           <i class="fa fa-odnoklassniki"></i>
+                                            <!-- <?=$report_text?> -->
                                         </span>
                                     </a>
 
