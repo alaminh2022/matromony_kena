@@ -3959,7 +3959,7 @@ class Home extends CI_Controller {
                                     $this->session->set_userdata($data);
                                 }
 
-                                redirect( base_url().'home/profile', 'refresh' );
+                                redirect( base_url().'Dashboard', 'refresh' );
                             }
                             elseif ($result->is_blocked == "yes") {
                                 $this->session->set_flashdata('alert','blocked');
@@ -4011,7 +4011,7 @@ class Home extends CI_Controller {
                                 $this->session->set_userdata($data);
                             }
 
-                            redirect( base_url().'home/profile', 'refresh' );
+                            redirect( base_url().'Dashboard', 'refresh' );
                         }
                         elseif ($result->is_blocked == "yes") {
                             $this->session->set_flashdata('alert','blocked');
