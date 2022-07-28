@@ -612,8 +612,22 @@ a.lgn-btn-home.regi-btn-lg {
     bottom: 95px !important;
     right: 2px !important;
 }
+footer.footer-from-bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
 /* sm */
 @media (max-width: 575px){
+    footer.footer-from-bottom {
+        position: relative;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 100;
+    }
 	.top-navbar .top-navbar-menu > ul.top-menu > li > a {
 	    padding: 14px 0px;
 	}

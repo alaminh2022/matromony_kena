@@ -292,23 +292,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
    
    
-    <!-- <footer>
-        <nav class="main-nav">
-        <ul>
-        <li><a target="_blank" class="js-support-footer-link keychainify-checked" href="">About the Project</a></li>
-        <li><a target="_blank" class="js-support-footer-link keychainify-checked" href="">Customer Support</a></li>
-
-        <li class="js-common-footer-terms hide-footer-item">
-        <a href="" target="_blank" class="js-common-footer-link keychainify-checked">User Agreement</a>
-        </li>
-        <li class="js-common-footer-affiliate">
-        <a href="" target="_blank" class="js-common-footer-link keychainify-checked">Affiliate program</a>
-        </li>
-
-        <li><a href="" target="_blank" class="js-common-footer-link keychainify-checked">Privacy Policy</a></li>
-        </ul>
-        </nav>
-    </footer> -->
+ 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
     <script>
            var owl = $('.owl-carousel');
@@ -340,6 +324,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     e.preventDefault();
                 });
           </script>
+             <footer class="footer-from-bottom">
+        <nav class="main-nav">
+        <ul>
+        <li><a target="_blank" class="js-support-footer-link keychainify-checked" href="">About the Project</a></li>
+        <li><a target="_blank" class="js-support-footer-link keychainify-checked" href="">Customer Support</a></li>
+
+        <li class="js-common-footer-terms hide-footer-item">
+        <a href="" target="_blank" class="js-common-footer-link keychainify-checked">User Agreement</a>
+        </li>
+        <li class="js-common-footer-affiliate">
+        <a href="" target="_blank" class="js-common-footer-link keychainify-checked">Affiliate program</a>
+        </li>
+
+        <li><a href="" target="_blank" class="js-common-footer-link keychainify-checked">Privacy Policy</a></li>
+        </ul>
+        </nav>
+    </footer>
 </body>
 </html>
 <!-- Bootstrap Modal -->
