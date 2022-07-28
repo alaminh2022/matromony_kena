@@ -32,7 +32,7 @@
 								                    <?php include 'messages.php'; ?>
 							                    </li>
 							                    <li class="dropdown dropdown--style-2 dropdown--animated float-left">
-								                    <a class="dropdown-toggle has-badge c-base-1" href="<?=base_url()?>home/profile">
+								                    <a class="dropdown-toggle has-badge c-base-1-white" href="<?=base_url()?>home/profile">
 								                    	<?php
 								                    		$profile_image = $this->Crud_model->get_type_name_by_id('member', $this->session->userdata['member_id'], 'profile_image');
 											                $images = json_decode($profile_image, true);

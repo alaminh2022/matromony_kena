@@ -15,6 +15,13 @@
                                 </div>
                             </div>
                         </footer>
+                        <?php 
+                        if (!empty($this->session->userdata['member_id']) && $page != 'profile/dashboard') {
+                        ?>
+                            <div class="global-chat-open-icon">
+                                <i class="fa fa-commenting" aria-hidden="true"></i>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

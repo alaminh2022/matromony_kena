@@ -61,16 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group has-feedback">
-                                    <label for="" class="text-uppercase"><?php echo translate('member_id')?></label>
-                                    <input type="text" class="form-control form-control-sm" name="member_id" id="filter_member_id" value="<?php if(isset($member_id)){echo $member_id;}?>">
-                                    <div class="help-block with-errors">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group has-feedback">
@@ -92,25 +83,8 @@
                                     <div class="help-block with-errors">
                                     </div>
                                 </div>
-                                <div class="form-group has-feedback">
-                                    <label for="" class="text-uppercase"><?php echo translate('caste_/_sect')?></label>
 
-                                    <select class="form-control form-control-sm selectpicker s_caste" name="caste" >
-                                        <option value="<?= $home_caste ?>"><?php echo translate('choose_a_religion_first')?></option>
-                                    </select>
-
-                                    <div class="help-block with-errors">
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback" id="">
-                                    <label for="" class="text-uppercase"><?php echo translate('sub_caste')?></label>
-
-                                    <select class="form-control form-control-sm selectpicker s_sub_caste" name="sub_caste">
-                                        <option value="<?= $home_sub_caste ?>"><?php echo translate('choose_a_caste_first')?></option>
-                                    </select>
-                                    <div class="help-block with-errors">
-                                    </div>
-                                </div>
+                                
                                 <?php
                                 }
                                 ?>

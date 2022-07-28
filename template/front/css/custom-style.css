@@ -619,6 +619,32 @@ footer.footer-from-bottom {
     bottom: 0;
     z-index: 100;
 }
+.direct-chat-contacts.global-user-chat-list {
+    position: fixed;
+    right: 0;
+    top: 83px;
+    width: 350px;
+}
+.global-user-chat-list{
+    display: none;
+}
+.global-chat-open-icon {
+    position: fixed;
+    bottom: 30px;
+    right: 75px;
+    font-size: 46px;
+    z-index: 100;
+    cursor: pointer;
+}
+.card.direct-chat.direct-chat-warning.global-user-chat-box {
+    position: fixed;
+    bottom: 0;
+    right: 356px;
+    display: none;
+}
+.with-border-global {
+    height: 41px;
+}
 /* sm */
 @media (max-width: 575px){
     footer.footer-from-bottom {

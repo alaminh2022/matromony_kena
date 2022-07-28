@@ -427,6 +427,11 @@
 .top-navbar .top-navbar-menu ul.top-menu > li.dropdown:hover .sub-menu {
   display: block; }
 
+ 
+.menu-bg-color{
+  background: #e7087f;
+  padding: 2px 0px;
+}
 @media (max-width: 991px) {
   .top-navbar .top-navbar-menu {
     float: none; }
@@ -668,14 +673,14 @@
     border-radius: 0; } 
 }
 .navbar-light .navbar-nav .nav-link {
-  color: #E91E63;
+  color: white;
   background: transparent; }
 
 .navbar-light .navbar-nav .nav-link:focus,
 .navbar-light .navbar-nav .nav-link:hover {
   /* color: #FFF;
    background: #E91E63; */
-    color: #E91E63;
+    /* color: #E91E63; */
     /* border-bottom: 2px solid #E91E63; */}
 
 .navbar-light .navbar-nav .show .nav-link,
@@ -12200,8 +12205,25 @@ section.ss-slice::after {
   padding-top: 20px; }
   /*ddddddd----------custom*/
   ul.inline-links.inline-links--style-3.custm-t1-member>li>a {
-    font-size: 16px;
+    font-size: 12px;
     
+}
+h4.card-inner-title.global-chat-icon {
+  color: #e7087f;
+  font-size: 21px;
+  text-align: left !important;
+}
+span.global-cross-icon {
+  position: absolute;
+  right: 14px;
+  top: 9px;
+  color: #e7087f;
+  font-size: 26px;
+  cursor: pointer;
+}
+.global-chat-open-icon {
+  
+  color: #e7087f;
 }
 @media screen and (min-width: 760px) {
   .timeline-item .timeline-info {
@@ -13567,9 +13589,20 @@ section.ss-slice::after {
   font-size: 14px;
   margin-top: -9px;
   margin-left: -3px; }
-
+a.dropdown-icon.dropdown-toggle.has-notification {
+    color: white;
+}
+img.img-responsive.c100px.dashboard-nv-img {
+  background: white;
+  border-radius: 50px;
+  padding: 10px;
+  margin-left: 12px;
+}
+.c-base-1-white{
+  color: white !important;
+}
 .c-base-1 {
-  color: #E91E63 !important; }
+  color: #e7087f !important; }
 
 .c-base-2 {
   color: #292f36 !important; }
@@ -15791,7 +15824,7 @@ a {
   transform: scaleX(1);
 }
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
-    color: #E91E63 !important;
+    /* color: #E91E63 !important; */
 }
 .nav_active:after {
   box-sizing: border-box !important;

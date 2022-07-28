@@ -3,9 +3,9 @@
     <div id="st-container" class="st-container">
         <div class="st-pusher">
             <div class="st-content">
-                <div class="st-content-inner">
+                <div class="st-content-inner dashboard-nav">
 					<!-- Navbar -->
-					<div id="myHeader">
+					<div id="myHeader" class="menu-bg-color">
 						
 						<nav class="navbar navbar-expand-lg navbar-light bg-default navbar--link-arrow navbar--uppercase">
 						    <div class="container-fluid navbar-container">
@@ -16,12 +16,12 @@
 	                                    $header_logo = json_decode($header_logo_info, true);
 	                                    if (file_exists('uploads/header_logo/'.$header_logo[0]['image'])) {
 	                                    ?>
-	                                        <img src="<?=base_url()?>uploads/header_logo/<?=$header_logo[0]['image']?>" class="img-responsive c100px" height="100%">
+	                                        <img src="<?=base_url()?>uploads/header_logo/<?=$header_logo[0]['image']?>" class="img-responsive c100px dashboard-nv-img" height="100%">
 	                                    <?php
 	                                    }
 	                                    else {
 	                                    ?>
-	                                        <img src="<?=base_url()?>uploads/header_logo/default_image.png" class="img-responsive c100px" height="100%">
+	                                        <img src="<?=base_url()?>uploads/header_logo/default_image.png" class="img-responsive c100px dashboard-nv-img" height="100%">
 	                                    <?php
 	                                    }
 	                                ?>
@@ -37,10 +37,17 @@
 						        <div class="collapse navbar-collapse align-items-center justify-content-end" id="navbar_main">
 						            <!-- Navbar links -->
 						            <ul class="navbar-nav" data-hover="dropdown">
+										<?php if (!empty($this->session->userdata['member_id'])) { ?>
 						                <li class="custom-nav">
 						                <a class="nav-link <?php if($page == 'home'){?>nav_active<?php }?>" href="<?=base_url()?>Dashboard" aria-haspopup="true" aria-expanded="false">
-						                <?php echo translate('home')?></a>
+						                <?php echo translate('Dashboard')?></a>
 										</li>
+										<?php }else{ ?>
+											<li class="custom-nav">
+											<a class="nav-link <?php if($page == 'home'){?>nav_active<?php }?>" href="<?=base_url()?>" aria-haspopup="true" aria-expanded="false">
+											<?php echo translate('home')?></a>
+											</li>
+										<?php } ?>
 										<!-- <li class="custom-nav"><a class="nav-link " href="about.php" aria-haspopup="true" aria-expanded="false">About</a></li> -->
 						                <li class="custom-nav dropdown">
 						                <a class="nav-link <?php if($page == 'listing' || $page == 'member_profile'){?>nav_active<?php }?>" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

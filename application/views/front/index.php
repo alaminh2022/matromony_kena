@@ -103,6 +103,83 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	?>
 	<a href="#" class="btn-shadow back-to-top btn-back-to-top"></a>
 	<button class="open_modal" style="display: none"><?php echo translate('open')?></button>
+    <!------Global Chat------->
+    <?php 
+    $user_id = $this->session->userdata('member_id');
+    if($page != 'profile/dashboard' && !empty($user_id)){ ?>
+        <div class="direct-chat-contacts global-user-chat-list">
+            <ul class="contacts-list">
+                <div class="pt-3 pb-2 text-center global-chat-header" style="border-bottom: 1px solid rgba(0, 0, 0, .15); margin: 0; width: 90% !important; margin-left: 5%;">
+                    <h4 class="card-inner-title global-chat-icon">
+                    <i class="fa fa-comments-o"></i> <?php echo translate('Chat')?></h4>
+                    <span class="global-cross-icon">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <?php foreach ($listed_messaging_members as $listed_member): ?>
+                    <?php if ($this->db->get_where('member', array('member_id' => $listed_member['member_id']))->row()->member_id):
+                        
+                        $member_info = $this->db->get_where('member', array('member_id' => $listed_member['member_id']))->row();
+                        if ($member_info->is_closed=='no') {
+                    ?>
+                        <li>
+                            <a onclick="open_message_box(<?=$listed_member['message_thread_id']?>,this)" id="thread_<?=$listed_member['message_thread_id']?>">
+                                <?php
+                                    $images = json_decode($member_info->profile_image, true);
+                                    if (file_exists('uploads/profile_image/'.$images[0]['thumb'])) {
+                                    ?>
+                                        <img class="contacts-list-img" src="<?=base_url()?>uploads/profile_image/<?=$images[0]['thumb']?>">
+                                    <?php
+                                    }
+                                    else {
+                                    ?>
+                                        <img class="contacts-list-img" src="<?=base_url()?>uploads/profile_image/default_image.png">
+                                    <?php
+                                    }
+                                ?>
+                                <div class="contacts-list-info">
+                                    <span class="contacts-list-name" data-member="<?=$member_info->member_id?>">
+                                        <?=$member_info->first_name.' '.$member_info->last_name?>
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    <!----Global chat box------>
+        <div class="card direct-chat direct-chat-warning global-user-chat-box">
+            <div class="card-header with-border with-border-global">
+                <h3 class="card-inner-title pull-left c-base-1">
+                    <i class="fa fa-comments-o"></i> <span id="msg_box_header"><?php echo translate('select_a_member')?></span>
+                </h3>
+                <div class="pull-right">
+                    <small id="msg_refresh">
+                    </small>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Conversations are loaded here -->
+                <div class="direct-chat-messages" id="msg_body" style="height: 100px">
+                    <p class="c-base-1 pt-4 text-center">"<?php echo translate('select_a_member_from_the_contact_list_to_start_messaging')?>"</p>
+                </div>
+                <!-- Contacts are loaded here -->
+            </div>
+            <div class="card-footer" style="padding: 8px;">
+                <form class="form-default" id="message_form" method="post">
+                    <div class="input-group">
+                        <input type="text" id="message_text" name="message_text" placeholder="Type Message ..." value="" class="form-control" style="z-index: 2;" >
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-base-1 btn-flat enterer" id="msg_send_btn" style="width: 60px" ><?php echo translate('send')?></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <?php } ?>
+
 </body>
 </html>
 <!-- Bootstrap Modal -->
@@ -130,6 +207,79 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $('.top_bar_right').load('<?php echo base_url(); ?>home/top_bar_right');
     });
 </script>
+
+<!---Global chat script-->
+<?php if($page != 'profile/dashboard' && !empty($user_id)){ ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.global-cross-icon').click(function(){
+                $('.global-user-chat-list').css({display:"none"})
+                $('.global-chat-open-icon').css({display:"block"});
+                $('.global-user-chat-box').css({display:"none"});
+        });
+        $('.global-chat-open-icon').click(function(){
+            $('.global-user-chat-list').css({display:"block"});
+            $('.global-chat-open-icon').css({display:"none"});
+        })
+    });
+</script>
+<script type="text/javascript">
+    function open_message_box(thread_id, now){
+        $('.global-user-chat-box').css({display:"block"});
+        $("#msg_body").html("<div class='text-center' id='payment_loader'><i class='fa fa-refresh fa-5x fa-spin'></i></div>");
+        $("#msg_box_header").html("<a class='c-base-1' target='_blank' href='<?=base_url()?>home/member_profile/"+$(now).find('.contacts-list-name').data('member')+"'>"+$(now).find('.contacts-list-name').html()+"</a>");
+        $("#msg_refresh").html("<a onclick='refresh_msg("+thread_id+")'><i class='fa fa-refresh'></i> <?=translate('refresh')?></a>");
+        $.ajax({
+            type: "POST",
+            url: "<?=base_url()?>home/get_messages/"+thread_id,
+            cache: false,
+            success: function(response) {
+                clearInterval(message_interval);
+                var message_interval =  setInterval(function(){
+                                            $("#msg_body").load('<?=base_url()?>home/get_messages/'+thread_id);
+                                        }, 4000);
+                $("#msg_body").removeAttr("style");
+                // $("#message_text").removeAttr('disabled');
+                $("#message_text").val('');
+                $("#msg_body").html(response);
+            }
+        });
+    }
+    function msg_send(thread, from, to){
+        if ($("#message_text").val().length != 0) {
+            var form_data = ($("#message_form").serialize());
+            $("#message_text").attr('disabled', 'disabled');
+            $("#msg_send_btn").attr('disabled', 'disabled');
+            $("#msg_send_btn").html("<i class='fa fa-refresh fa-spin'></i>");
+
+            $.ajax({
+                type: "POST",
+                url: "<?=base_url()?>home/send_message/"+thread+"/"+from+"/"+to,
+                data: form_data,
+                success: function(response) {
+                    // alert('done');
+                    $("#message_text").removeAttr('disabled');
+                    $("#msg_send_btn").removeAttr('disabled');
+                    $("#message_text").val('');
+                    const html_btn = "<?php echo translate('send')?>";
+                    $("#msg_send_btn").html(html_btn);
+                    $.ajax({
+                        type: "POST",
+                        url: "<?=base_url()?>home/get_messages/"+thread,
+                        cache: false,
+                        success: function(response) {
+                            $("#msg_body").html(response);
+                        }
+                    });
+                }
+            });
+        }
+    }
+    function refresh_msg(thread_id){
+        $(".contacts-list").find("#thread_"+thread_id).click();
+    }
+</script>
+<?php } ?>
 <!-- Bootstrap Modal -->
 
 <script>
