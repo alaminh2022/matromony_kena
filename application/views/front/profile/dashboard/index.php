@@ -100,7 +100,7 @@
                                         <b><?php echo translate('profile_information')?></b>
                                     </h3>
                                     <div class="pull-right">
-                                        <a href="<?=base_url()?>home/profile/edit_full_profile" class="btn btn-base-1 btn-sm btn-shadow"><i class="ion-edit"></i> <?php echo translate('edit_all')?></a>
+                                        
                                     </div>
                                 </div>
                                 <?php
@@ -109,17 +109,11 @@
                                 ?>
                                 <div class="card-body pt-2" style="padding: 1rem 0.5rem;">
                                     <!-- Contact information -->
-                                    <div id="section_introduction">
-                                        <?php include_once 'introduction.php'; ?>
-                                    </div>
-                                    <div id="section_basic_info">
-                                        <?php include_once 'basic_info.php'; ?>
-                                    </div>
                                     <?php
-                                        if ($this->db->get_where('frontend_settings', array('type' => 'present_address'))->row()->value == "yes") {
+                                        if ($this->db->get_where('frontend_settings', array('type' => 'hobbies_and_interests'))->row()->value == "yes") {
                                     ?>
-                                        <div id="section_present_address">
-                                            <?php include_once 'present_address.php'; ?>
+                                        <div id="section_hobbies_and_interest">
+                                            <?php include_once 'hobbies_and_interest.php'; ?>
                                         </div>
                                     <?php
                                         }
@@ -151,15 +145,7 @@
                                     <?php
                                         }
                                     ?>
-                                    <?php
-                                        if ($this->db->get_where('frontend_settings', array('type' => 'hobbies_and_interests'))->row()->value == "yes") {
-                                    ?>
-                                        <div id="section_hobbies_and_interest">
-                                            <?php include_once 'hobbies_and_interest.php'; ?>
-                                        </div>
-                                    <?php
-                                        }
-                                    ?>
+                                  
                                     <?php
                                         if ($this->db->get_where('frontend_settings', array('type' => 'personal_attitude_and_behavior'))->row()->value == "yes") {
                                     ?>

@@ -76,6 +76,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<!-- facebook chat ends -->
 	<?php } ?>
+    <style>
+        @media screen and (max-width:480px) {
+            .person-gender__label {
+                padding: 12px 6px 14px 39px;
+            }
+            .desktop-off{
+                display: block;
+            }
+            .banner-spance-bottom-t1 {
+                height: 1px;
+                background: #e7087f;
+            }
+            h2.learn-more__why-header.slogan {
+                font-size: 27px;
+                margin-top: 35px;
+            }
+            .b-t1-wrap {
+                background: #f3f3f3;
+                padding: 30px;
+                text-align: center;
+                height: 325px;
+                margin-top: 16px;
+            }
+            a.learn-more__create-profile-btn.js-create-profile-btn.button-main.button-main--create-profile.keychainify-checked {
+                background: #e7087f;
+                color: white;
+                padding: 6px 44px;
+            }
+        }
+    </style>
 </head>
 <body>
    
@@ -91,8 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="st-content">
                         <div class="st-content-inner t1-head-space-area">
                             <!-- Navbar -->
-                            <div id="myHeader" class="stk-ck-t1">
-                               
+                            <div id="myHeader" class="stk-ck-t1 t1-theme-header">
                                 <nav class="navbar navbar-expand-lg navbar-light bg-default navbar--link-arrow navbar--uppercase">
                                     <div class="container navbar-container">
                                         <!-- Brand/Logo -->
@@ -112,7 +141,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 }
                                             ?>
                                         </a>
-                                        <div class="d-inline-block">
+                                        <div class="d-inline-block did-you-t1 desktop-off">
+                                                <a href="<?php echo base_url(); ?>home/login" class="t1-login-btn-22"> LOGIN</a>
+                                           </div>
+                                        <div class="d-inline-block m-off">
                                             <!-- Navbar toggler  -->
                                             <button class="navbar-toggler hamburger hamburger-js hamburger--spring" type="button" data-toggle="collapse" data-target="#navbar_main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                                             <span class="hamburger-box">

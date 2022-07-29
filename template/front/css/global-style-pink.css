@@ -1807,7 +1807,7 @@ a:hover {
 
 .hamburger.is-active .hamburger-inner:after,
 .hamburger.is-active .hamburger-inner:before {
-  background-color: #E91E63; }
+  background-color: #ffffff; }
 
 .hamburger:not(.is-active) .hamburger-inner:before {
   top: 6px !important; }
@@ -16169,4 +16169,12 @@ span#noti_item {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
+}
+@media screen and (max-width:480px) {
+  .st-content-inner.t1-head-space-area {
+      background: #e7087f;
+  }
+  .stk-ck-t1.sticky-header.t1-theme-header {
+      background: #e7087f;
+  }
 }

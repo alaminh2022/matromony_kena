@@ -7,6 +7,9 @@
 	line-height: inherit;
 	white-space: nowrap;
 }
+.desktop-off{
+    display: none;
+}
 .listing-image {
 	height: 216px !important;
 }
@@ -654,6 +657,14 @@ footer.footer-from-bottom {
         bottom: 0;
         z-index: 100;
     }
+    .direct-chat-contacts.global-user-chat-list {
+       
+        top: 74px;
+        width: 100%;
+    }
+    .card.direct-chat.direct-chat-warning.global-user-chat-box {
+        right: 41px;
+    }
 	.top-navbar .top-navbar-menu > ul.top-menu > li > a {
 	    padding: 14px 0px;
 	}
@@ -708,6 +719,18 @@ footer.footer-from-bottom {
 	nav.navbar .navbar-brand {
 	    max-width: calc(100% - 60px);
 	}
+    .st-content-inner.t1-head-space-area {
+        padding-top: 0;
+        
+    }
+    .m-off{
+        display: none ! important;
+    }
+    .stk-ck-t1.sticky-header.t1-theme-header {
+       
+        padding: 0px;
+    }
+      
 }
 /* md */
 @media (max-width: 767px){

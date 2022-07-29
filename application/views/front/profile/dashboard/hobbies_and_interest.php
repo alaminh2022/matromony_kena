@@ -6,7 +6,7 @@
     <div id="info_hobbies_and_interest">
         <div class="card-inner-title-wrapper pt-0">
             <h3 class="card-inner-title pull-left">
-                <?php echo translate('hobbies_and_interests')?>
+                <?php echo translate('my_interests')?>
             </h3>
             <div class="pull-right">
                 <button type="button" id="unhide_hobbies_and_interest" <?php if ($privacy_status_data[0]['hobbies_and_interest'] == 'yes') {?> style="display: none" <?php }?> class="btn btn-base-1 btn-sm btn-icon-only btn-shadow mb-1" onclick="unhide_section('hobbies_and_interest')">

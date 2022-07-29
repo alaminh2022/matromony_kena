@@ -76,6 +76,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<!-- facebook chat ends -->
 	<?php } ?>
+    <style> 
+    @media screen and (max-width:480px) {
+        .st-content-inner.t1-head-space-area-login {
+            background: #e7087f;
+            margin: 0;
+            padding: 0;
+        }
+        .sticky-header {
+            background: #eb067c;
+        }
+    }
+    </style>
 </head>
 <body>
    <?php
@@ -114,7 +126,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 }
                                             ?>
                                         </a>
-                                        <div class="d-inline-block">
+                                        <div class="d-inline-block m-off">
                                             <!-- Navbar toggler  -->
                                             <button class="navbar-toggler hamburger hamburger-js hamburger--spring" type="button" data-toggle="collapse" data-target="#navbar_main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                                             <span class="hamburger-box">
