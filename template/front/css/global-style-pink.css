@@ -4241,7 +4241,9 @@ a > .block {
   vertical-align: top;
   padding: 5px;
   border-top: 1px solid rgba(0, 0, 0, 0.05); }
-
+  .li_active-mem {
+    color: #e7087f !important;
+}
 @media (max-width: 767px) {
   .block--style-3.list .block-image {
     display: block;
@@ -4255,7 +4257,7 @@ a > .block {
     display: block;
     padding: 20px; } }
 .block--style-3.list .block-footer {
-  padding: 8px 15px; }
+  padding: 3px 0px; }
 
 .block--style-4 .info-author:after,
 .block--style-4 .info-author:before {
@@ -12205,7 +12207,7 @@ section.ss-slice::after {
   padding-top: 20px; }
   /*ddddddd----------custom*/
   ul.inline-links.inline-links--style-3.custm-t1-member>li>a {
-    font-size: 12px;
+    font-size: 16px;
     
 }
 h4.card-inner-title.global-chat-icon {

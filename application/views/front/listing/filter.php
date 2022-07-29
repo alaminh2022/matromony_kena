@@ -17,11 +17,11 @@
                                             <?php $member_gender = $this->db->get_where('member',array('member_id'=>$this->session->userdata['member_id']))->row()->gender; ?>
                                             <?php if($member_gender == '2') { ?>
                                                 <input type="radio" name="gender" id="groom" value="1" <?php if(!empty($home_gender==1)){ ?>checked<?php }?>>
-                                                <label for="groom"><?=translate('groom')?></label>
+                                                <label for="groom"><?=translate('Man')?></label>
 
                                             <?php } elseif ($member_gender == '1') { ?>
                                                 <input type="radio" name="gender" id="bride" value="2" <?php if(!empty($home_gender==2)){ ?>checked<?php }?>>
-                                                <label for="bride" class="pr-3"><?=translate('bride')?></label>
+                                                <label for="bride" class="pr-3"><?=translate('Woman')?></label>
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -34,9 +34,9 @@
                                         <label for="" class="text-uppercase"><?php echo translate('looking_for')?></label>
                                         <div class="radio radio-primary">
                                             <input type="radio" name="gender" id="bride" value="2" <?php if(!empty($home_gender==2)){ ?>checked<?php }?>>
-                                            <label for="bride" class="pr-3"><?=translate('bride')?></label>
+                                            <label for="bride" class="pr-3"><?=translate('Woman')?></label>
                                             <input type="radio" name="gender" id="groom" value="1" <?php if(!empty($home_gender==1)){ ?>checked<?php }?>>
-                                            <label for="groom"><?=translate('groom')?></label>
+                                            <label for="groom"><?=translate('Man')?></label>
                                         </div>
                                     </div>
                                 </div>

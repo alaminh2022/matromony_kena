@@ -113,6 +113,29 @@ foreach ($get_all_members as $member): ?>
             <div class="row align-items-center">
                 <div class="col-sm-12 text-center">
                     <ul class="inline-links inline-links--style-3 custm-t1-member">
+                        <li>
+                            <?php
+                                $if_message = $this->db->get_where('message_thread', array('message_thread_from' => $member->member_id, 'message_thread_to' => $this->session->userdata('member_id')))->row();
+                                if (!$if_message) {
+                                    $if_message = $this->db->get_where('message_thread', array('message_thread_from' => $this->session->userdata('member_id'), 'message_thread_to' => $member->member_id))->row();
+                                }
+
+                                if ($if_message) {
+                                    $message_onclick = 0;
+                                    $message_text = translate('messaging_enabled');
+                                    $message_class = "li_active-mem";
+                                }
+                                else {
+                                    $message_onclick = 1;
+                                    $message_text = translate('enable_messaging');
+                                    $message_class = "";
+                                }
+                            ?>
+                            <a class="<?=$message_class?>" id="message_a_<?=$member->member_id?>" <?php if ($message_onclick == 1){?>onclick="return confirm_message(<?=$member->member_id?>)"<?php }?>>
+                                
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>
                         <li class="listing-hover">
                             <a onclick="return goto_profile(<?=$member->member_id?>)">
                                 <i class="fa fa-id-card"></i><?php //echo translate('full_profile')?>

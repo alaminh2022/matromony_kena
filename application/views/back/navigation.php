@@ -267,9 +267,9 @@
 									</ul>
 								</li>
 							<?php } if ($this->Crud_model->admin_permission('captcha_settings')){?>
-								<li <?php if($page_name=="captcha_settings"){ ?> class="active-link" <?php } ?>>
+								<!-- <li <?php if($page_name=="captcha_settings"){ ?> class="active-link" <?php } ?>>
 									<a href="<?=base_url()?>admin/captcha_settings"><i class="fa fa-retweet"></i><?php echo translate('captcha_settings')?></a>
-								</li>
+								</li> -->
 							<?php } if ($this->Crud_model->admin_permission('google_analytics_settings')){?>
 								<li <?php if($page_name=="google_analytics_settings"){ ?> class="active-link" <?php } ?>>
 									<a href="<?=base_url()?>admin/google_analytics_settings"><i class="fa fa-bar-chart"></i><?php echo translate('google_analytics_settings')?></a>
@@ -306,12 +306,12 @@
 						</a>
 					</li>
 					<?php } if ($this->Crud_model->admin_permission('language')){?>
-					<li <?php if($page_name=="manage_language"){ ?> class="active-link" <?php } ?>>
+					<!-- <li <?php if($page_name=="manage_language"){ ?> class="active-link" <?php } ?>>
 						<a href="<?=base_url()?>admin/manage_language">
 							<i class="fa fa-language"></i>
 							<span class="menu-title"><?php echo translate('language')?></span>
 						</a>
-					</li>
+					</li> -->
 					<?php } if ($this->Crud_model->admin_permission('manage_admin')){?>
 					<li <?php if($page_name=="manage_admin"){ ?> class="active-link" <?php } ?>>
 						<a href="<?=base_url()?>admin/manage_admin">
