@@ -212,6 +212,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php if($page != 'profile/dashboard' && !empty($user_id)){ ?>
 <script type="text/javascript">
     $(document).ready(function(){
+        $('#message_form').submit(function(){
+            $('#msg_send_btn').click();
+            return false;
+        })
         $('.global-cross-icon').click(function(){
                 $('.global-user-chat-list').css({display:"none"})
                 $('.global-chat-open-icon').css({display:"block"});
