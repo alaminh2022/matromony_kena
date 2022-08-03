@@ -74,7 +74,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 package_bg_light mt-4">
+                <div id="pesapalifrem" class="col-md-8 package_bg_light mt-4">
+                
+                </div>
+                <div class="col-md-8 package_bg_light mt-4" id="pesapalifrem_other">
                     <?php if($this->db->get_where("member", array("member_id" => $this->session->userdata('member_id')))->row()->is_closed == 'yes'){?>
                         <div class="text-center py-5">
                         <h5 class="pt-5 pb-4 font_base"><?php echo translate('your_account_is_closed!_please_re-open_the_account_from_your_profile!')?></h5>
@@ -118,6 +121,22 @@
                                                       <img src="<?=base_url()?>template/front/images/paypal.jpg">
                                                       <div class="text-center bg-base-1" style="height: 26px;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;">
                                                           <span class="span-text" id="select_paypal_text" style=""><?=translate('select')?></span>
+                                                      </div>
+                                                  </div>
+                                              </a>
+                                          </div>
+                                      </div>
+                                  <?php endif ?>
+                                  <?php
+                                  $stripe_set = $this->db->get_where('business_settings', array('type' => 'pesapal_set'))->row()->value;
+                                  if ($stripe_set=="ok"): ?>
+                                      <div class="col-4">
+                                          <div class="card mb-3 " style="background: transparent;">
+                                              <a id="select_pesapal">
+                                                  <div class="card-image">
+                                                      <img src="<?=base_url()?>template/front/images/pesapal.jpg">
+                                                      <div class="text-center bg-base-1" style="height: 26px;border-bottom-left-radius: 3px;    border-bottom-right-radius: 3px;">
+                                                          <span class="span-text" id="select_pesapal_text"><?=translate('select')?></span>
                                                       </div>
                                                   </div>
                                               </a>
@@ -541,6 +560,33 @@
                                     // Close Checkout on page navigation
                                     $(window).on('popstate', function() {
                                         handler.close();
+                                    });
+                                });
+                            </script>
+                            <script>
+                                $(document).ready(function(e) {
+                                    $('#select_pesapal').on('click', function(e) {
+                                        $("#payment_loader").show();
+                                        $("#payment_section").hide();
+                                        var url = '<?php echo base_url(); ?>home/pesaPayment';
+                                        $.ajax({
+                                            type:"POST",
+                                            url:url,
+                                            dataType:"json",
+                                            success:function(response){
+                                                    if(response.status){
+                                                        $('#pesapalifrem').css({display:"block"});
+                                                        $('#pesapalifrem_other').css({display:"none"});
+                                                        var payData = response.data;
+                                                        var htmliFreme =`<iframe src="${payData.redirect_url}" ></iframe>`;
+                                                        $('#pesapalifrem').html(htmliFreme);
+                                                    }else{
+                                                        $("#payment_loader").hide();
+                                                        $("#payment_section").show();
+                                                    }
+                                            }
+
+                                        });
                                     });
                                 });
                             </script>

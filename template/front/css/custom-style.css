@@ -648,6 +648,13 @@ footer.footer-from-bottom {
 .with-border-global {
     height: 41px;
 }
+#pesapalifrem{
+    display: none;
+}
+div#pesapalifrem>iframe {
+    height: 100%;
+    width: 100%;
+}
 /* sm */
 @media (max-width: 575px){
     footer.footer-from-bottom {

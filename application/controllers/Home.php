@@ -3703,6 +3703,54 @@ class Home extends CI_Controller {
         redirect(base_url() . 'home/plans', 'refresh');
     }
 
+    function pesaPayment()
+    {
+        
+        $this->load->library('pesapal');
+        $tokenResponse =$this->pesapal->getAuthToken();
+        if($tokenResponse['status']){
+            $token = $tokenResponse['token'];
+            $registeripn = $this->pesapal->registerIPN($token);
+            if($registeripn['status']){
+                $ipnId = $registeripn['ipn_id'];
+                $registerInfo = array(
+                    'member_name'=> $this->session->userdata('member_name'),
+                    'member_email'=> $this->session->userdata('member_email')
+                );
+                $ordersubmit = $this->pesapal->SubmitOrderRequest($token, $ipnId, $registerInfo);
+                if($ordersubmit['status'])
+                {
+                    $returnResponse = array(
+                        'status'=>true,
+                        'data'=>$ordersubmit['data']
+                    );
+                    echo json_encode($returnResponse); 
+
+                }else{
+                    $returnResponse = array(
+                        'status'=>false,
+                        'msg'=>'User information is not vaild'
+                    );
+                    echo json_encode($returnResponse); 
+                }
+            }else{
+                $returnResponse = array(
+                    'status'=>false,
+                    'msg'=>'Ipn invaild'
+                );
+                echo json_encode($returnResponse); 
+            }
+            
+        }else{
+            $returnResponse = array(
+                'status'=>false,
+                'msg'=>'consumer_key or consumer_secret invaild'
+            );
+            echo json_encode($returnResponse);
+        }
+        
+        
+    }
 
 
     function cache_setup_info($connector,$selector,$select,$type,$ready=''){

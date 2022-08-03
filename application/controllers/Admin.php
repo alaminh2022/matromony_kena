@@ -5506,6 +5506,35 @@ class Admin extends CI_Controller {
 			}
 
 		}
+		elseif ($para1=="update_pespal") {
+
+			$stripe_activation = $this->input->post('pesapal_activation');
+			if (isset($stripe_activation)) {
+				$data1['value'] = "ok";
+			} else {
+				$data1['value'] = "no";
+			}
+			$data2['value'] = $this->input->post('pesapal_key');
+			$data3['value'] = $this->input->post('pesapal_secret_key');
+
+			$this->db->where('type','pesapal_set');
+			$result = $this->db->update('business_settings', $data1);
+
+			$this->db->where('type','pesapal_key');
+			$result = $this->db->update('business_settings', $data2);
+
+			$this->db->where('type','pesapal_secret_key');
+			$result = $this->db->update('business_settings', $data3);
+			recache();
+
+			if ($result) {
+				$this->session->set_flashdata('alert', 'edit');
+			}
+			else {
+				$this->session->set_flashdata('alert', 'failed_edit');
+			}
+
+		}
 		elseif ($para1=="update_pum") {
 
 			$pum_activation = $this->input->post('pum_activation');
