@@ -572,14 +572,16 @@
                                         $.ajax({
                                             type:"POST",
                                             url:url,
+                                            data:$('#payment_form').serialize(),
                                             dataType:"json",
                                             success:function(response){
                                                     if(response.status){
                                                         $('#pesapalifrem').css({display:"block"});
                                                         $('#pesapalifrem_other').css({display:"none"});
                                                         var payData = response.data;
-                                                        var htmliFreme =`<iframe src="${payData.redirect_url}" ></iframe>`;
-                                                        $('#pesapalifrem').html(htmliFreme);
+                                                        window.location.href = payData.redirect_url;
+                                                        // var htmliFreme =`<iframe src="${payData.redirect_url}" ></iframe>`;
+                                                        // $('#pesapalifrem').html(htmliFreme);
                                                     }else{
                                                         $("#payment_loader").hide();
                                                         $("#payment_section").show();

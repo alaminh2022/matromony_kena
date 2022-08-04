@@ -7,6 +7,7 @@ class Pesapal{
         // initialization constructor.  Called when class is created.
         $CI=& get_instance();
         $CI->load->database();
+        $this->db = $CI->db;
         $type = $CI->db->get_where('business_settings',array('type'=>'pesapal_account_type'))->row()->value;
         if($type == 'sandbox') {
            $this->pesapal_url = 'https://cybqa.pesapal.com/pesapalv3';
@@ -14,7 +15,7 @@ class Pesapal{
            $this->pesapal_url = 'https://pay.pesapal.com/v3';
         }
         $this->ipnurl = 'https://mfoundlove.com/ipn';
-        $this->callback_url= 'https://mfoundlove.com/response';
+        $this->callback_url= base_url().'pesapal-response';
         $this->consumer_key = $CI->db->get_where('business_settings',array('type'=>'pesapal_key'))->row()->value;
         $this->consumer_secret = $CI->db->get_where('business_settings',array('type'=>'pesapal_secret_key'))->row()->value;
   
@@ -37,7 +38,7 @@ class Pesapal{
             return array('status'=>false, 'msg'=>$responseAuthData);
         }
      }
-     function registerIPN($token)
+     function registerIPN($token, $userInfos)
      {
         $peramUrl = '/api/URLSetup/RegisterIPN';
         $postData =array(
@@ -47,7 +48,16 @@ class Pesapal{
         $responseipnData = $this->requestToPesapal($peramUrl, 'POST', $postData, $token);
         $responseipnDataParse = json_decode($responseipnData);
         if($responseipnDataParse->ipn_id){
-            return array('status'=>true, 'ipn_id'=>$responseipnDataParse->ipn_id);
+            $this->db->insert('package_payment', array(
+                'plan_id'=>$userInfos['plan_id'],
+                'member_id'=>$userInfos['member_id'],
+                'payment_type'=>'Pesapal',
+                'payment_status'=>'due',
+                'ipn_id'=>$responseipnDataParse->ipn_id,
+                'response_ipn'=>$responseipnData
+            ));
+            $paymentTempId= $this->db->insert_id();
+            return array('status'=>true, 'ipn_id'=>$responseipnDataParse->ipn_id, 'paymentTempId'=>$paymentTempId);
         }else{
             return array('status'=>false, 'msg'=>$responseipnData);
         }
@@ -58,9 +68,9 @@ class Pesapal{
         
         $postData =array(
             "id"=>$this->gen_uuid(),
-            "currency"=>'KES',
-            "amount"=>'100.00',
-            "description"=>"Preimum package purchase",
+            "currency"=>'USD',
+            "amount"=>$registerInfo['amount'],
+            "description"=>$registerInfo['title'],
             "callback_url"=>$this->callback_url,
             "notification_id"=> $ipnId,
             "billing_address"=>array(
@@ -82,11 +92,30 @@ class Pesapal{
         $responseRegisterData = $this->requestToPesapal($peramUrl, 'POST', $postData, $token);
         $responseRegisterDataParse = json_decode($responseRegisterData);
         if($responseRegisterDataParse->order_tracking_id){
+            $this->db->where('package_payment_id', $registerInfo['paymentTempId']);
+            $this->db->update('package_payment', array(
+                'amount'=>$registerInfo['amount'],
+                'order_tracking_id'=>$responseRegisterDataParse->order_tracking_id,
+                'merchant_reference'=>$responseRegisterDataParse->merchant_reference,
+                'response_order'=>$responseRegisterData
+            ));
             return array('status'=>true, 'data'=>$responseRegisterDataParse);
         }else{
             return array('status'=>false, 'msg'=>$responseRegisterData);
         }
         
+     }
+     function getOrderStatus($trackingID, $token)
+     {
+        $peramUrl = '/api/Transactions/GetTransactionStatus?orderTrackingId='.$trackingID;
+        $postData =array();
+        $responseipnData = $this->requestToPesapal($peramUrl, 'GET', $postData, $token);
+        $responseipnDataParse = json_decode($responseipnData);
+        if($responseipnDataParse->payment_status_description){
+            return array('status'=>true, 'data'=>$responseipnDataParse);
+        }else{
+            return array('status'=>false, 'msg'=>$responseipnData);
+        }
      }
      function requestToPesapal($peramUrl, $method, $postData, $token=null)
      {
@@ -94,7 +123,9 @@ class Pesapal{
             $ch = curl_init();
             $customUrl = $this->pesapal_url.$peramUrl;
             curl_setopt($ch, CURLOPT_URL, $customUrl);
-            curl_setopt($ch, CURLOPT_POST, 1);
+            if($method == 'POST'){
+                curl_setopt($ch, CURLOPT_POST, 1);
+            }
             $authToken =null;
             if($token){
                 $authToken ='Authorization: Bearer '.$token;

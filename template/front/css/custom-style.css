@@ -655,6 +655,9 @@ div#pesapalifrem>iframe {
     height: 100%;
     width: 100%;
 }
+.desktop-off{
+    display: none !important;
+}
 /* sm */
 @media (max-width: 575px){
     footer.footer-from-bottom {

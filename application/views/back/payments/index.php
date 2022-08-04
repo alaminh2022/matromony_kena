@@ -68,6 +68,19 @@
 											<input type="text" class="form-control" name="pesapal_secret_key" value="<?=$this->db->get_where('business_settings', array('type' => 'pesapal_secret_key'))->row()->value;?>" placeholder="<?php echo translate('your_publishable_key')?>">
 										</div>
 									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="phone"><b><?= translate('account_type')?></b></label>
+										<div class="col-sm-8">
+											<select class="form-control" name="pesapal_account_type">
+												<?php
+													$paypal_account_type = $this->db->get_where('business_settings', array('type' => 'pesapal_account_type'))->row()->value;
+												?>
+									            <option value="sandbox" <?php if ($paypal_account_type == "sandbox"){?> selected<?php } ?>> <?= translate('sandbox')?></option>
+									            <option value="original" <?php if ($paypal_account_type == "original"){?> selected<?php } ?>> <?= translate('original')?></option>
+									        </select>
+										</div>
+									</div>
 									<div class="form-group">
 										<div class="col-sm-offset-3 col-sm-8 text-right">
 											<button type="submit" class="btn btn-primary btn-sm btn-labeled fa fa-save"><?php echo translate('save')?></button>

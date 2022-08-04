@@ -5516,6 +5516,7 @@ class Admin extends CI_Controller {
 			}
 			$data2['value'] = $this->input->post('pesapal_key');
 			$data3['value'] = $this->input->post('pesapal_secret_key');
+			$data4['value'] = $this->input->post('pesapal_account_type');
 
 			$this->db->where('type','pesapal_set');
 			$result = $this->db->update('business_settings', $data1);
@@ -5525,6 +5526,10 @@ class Admin extends CI_Controller {
 
 			$this->db->where('type','pesapal_secret_key');
 			$result = $this->db->update('business_settings', $data3);
+
+			$this->db->where('type','pesapal_account_type');
+			$result = $this->db->update('business_settings', $data4);
+
 			recache();
 
 			if ($result) {

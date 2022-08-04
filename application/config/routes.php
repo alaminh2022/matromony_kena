@@ -52,4 +52,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['Dashboard']='home/listing';
+$route['pesapal-response']='home/pesapalResponse';
 $route['translate_uri_dashes'] = FALSE;
