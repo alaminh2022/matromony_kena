@@ -612,8 +612,8 @@ class Home extends CI_Controller {
 
         // pagination
         $config['base_url'] = $config_base_url;
-        $config['per_page'] = 5;
-        $config['uri_segment'] = 5;
+        $config['per_page'] = 12;
+        $config['uri_segment'] = 12;
         $config['cur_page_giv'] = $para1;
         if ($para2 == "search") {
             $function = "filter_members('0', 'search')";
