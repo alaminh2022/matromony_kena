@@ -633,7 +633,7 @@ footer.footer-from-bottom {
 }
 .global-chat-open-icon {
     position: fixed;
-    bottom: 30px;
+    bottom: 15px;
     right: 75px;
     font-size: 46px;
     z-index: 100;
