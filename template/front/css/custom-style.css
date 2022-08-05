@@ -660,6 +660,9 @@ div#pesapalifrem>iframe {
 }
 /* sm */
 @media (max-width: 575px){
+    div#pesapalifrem {
+        min-height: 1232px;
+    }
     footer.footer-from-bottom {
         position: relative;
         left: 0;
