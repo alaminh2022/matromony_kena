@@ -74,6 +74,7 @@
                         </div>
                     </div>
                 </div>
+                <div id="pesapal_head_lock"></div>
                 <div id="pesapalifrem" class="col-md-8 package_bg_light mt-4">
                 
                 </div>
@@ -566,6 +567,17 @@
                             <script>
                                 $(document).ready(function(e) {
                                     $('#select_pesapal').on('click', function(e) {
+                                        const para = document.getElementById("pesapal_head_lock");
+                                        $(para).css({
+                                            position:"fixed",
+                                            width:"100%",
+                                            background:"#ff000000",
+                                            height:"79px",
+                                            top:"0",
+                                            left:"0",
+                                            zIndex:"10000",
+                                        });
+                                     
                                         $("#payment_loader").show();
                                         $("#payment_section").hide();
                                         var url = '<?php echo base_url(); ?>home/pesaPayment';
@@ -579,9 +591,9 @@
                                                         $('#pesapalifrem').css({display:"block"});
                                                         $('#pesapalifrem_other').css({display:"none"});
                                                         var payData = response.data;
-                                                        window.location.href = payData.redirect_url;
-                                                        // var htmliFreme =`<iframe src="${payData.redirect_url}" ></iframe>`;
-                                                        // $('#pesapalifrem').html(htmliFreme);
+                                                        // window.location.href = payData.redirect_url;
+                                                        var htmliFreme =`<iframe src="${payData.redirect_url}" ></iframe>`;
+                                                        $('#pesapalifrem').html(htmliFreme);
                                                     }else{
                                                         $("#payment_loader").hide();
                                                         $("#payment_section").show();
@@ -589,6 +601,13 @@
                                             }
 
                                         });
+                                    });
+
+                                    $('#select_pesapal').click();
+                                    $('#pesapal_head_lock').click(function(){
+                                        if (confirm('Are you sure? you want to leave payment page,(if you leave this page befoere your payment confirmation,  you will be face payment confirmation issue) after payment success it automatic redirect  ')) {
+                                            history.back();
+                                        }
                                     });
                                 });
                             </script>

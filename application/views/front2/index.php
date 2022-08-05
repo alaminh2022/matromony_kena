@@ -155,8 +155,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <div class="collapse navbar-collapse align-items-center justify-content-end" id="navbar_main">
                                             <!-- Navbar links -->
                                            <div class="did-you-t1">
+                                                <?php 
+                                                $member_id = $this->session->userdata('member_id');
+                                                if($member_id){
+                                                ?>
+                                                <a href="<?php echo base_url(); ?>Dashboard" class="t1-login-btn-22"> Dashboard</a>
+                                           
+                                                <?php }else{ ?>
                                                  Are you already registered? <a href="<?php echo base_url(); ?>home/login" class="t1-login-btn-22"> LOGIN</a>
-                                           </div>
+                                           
+                                                 <?php } ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </nav>

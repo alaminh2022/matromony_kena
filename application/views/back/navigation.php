@@ -354,20 +354,7 @@
                         </ul>
                     </li>
 				<?php } ?>
-				<?php if($this->session->userdata('admin_id') == 1 ){ ?>
-					<li <?php if($page_name=="backup"){ ?> class="active-link" <?php } ?>>
-						<a href="<?php echo base_url(); ?>admin/backup/">
-							<i class="fa fa-shopping-basket"></i>
-							<span class="menu-title"><?php echo translate('backup')?></span>
-						</a>
-					</li>
-					<li <?php if($page_name=="update"){ ?> class="active-link" <?php } ?>>
-						<a href="<?php echo base_url(); ?>admin/update/" >
-							<i class="fa fa-check-square-o"></i>
-							<span class="menu-title"><?php echo translate('update')?></span>
-						</a>
-					</li>
-				<?php } ?>
+				
 
 				<?php if ($this->Crud_model->admin_permission('online_knowledge_base')){?>
                     <li style="display:none;">
