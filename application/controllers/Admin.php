@@ -983,7 +983,7 @@ class Admin extends CI_Controller {
 				}
 			}
 			elseif ($para1=="update_member") {
-				$this->form_validation->set_rules('introduction', 'Introduction', 'required');
+				// $this->form_validation->set_rules('introduction', 'Introduction', 'required');
 
 				$this->form_validation->set_rules('first_name', 'First Name', 'required');
 				$this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -995,41 +995,41 @@ class Admin extends CI_Controller {
 	            if ($this->input->post('old_mobile') != $this->input->post('mobile')) {
 	                $this->form_validation->set_rules('mobile', 'Mobile', 'required|is_unique[member.mobile]',array('required' => 'The %s is required.', 'is_unique' => 'This %s already exists.'));
 	            }
-	            $this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
+	            // $this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
 				$this->form_validation->set_rules('date_of_birth', 'Date of Birth', 'required');
 
 				if ($this->db->get_where('frontend_settings', array('type' => 'present_address'))->row()->value == "yes")
 				{
-					$this->form_validation->set_rules('country', 'Country', 'required');
-		            $this->form_validation->set_rules('state', 'State', 'required');
+					// $this->form_validation->set_rules('country', 'Country', 'required');
+		            // $this->form_validation->set_rules('state', 'State', 'required');
 				}
 
 	            if ($this->db->get_where('frontend_settings', array('type' => 'education_and_career'))->row()->value == "yes")
 				{
-		            $this->form_validation->set_rules('highest_education', 'Highest Education', 'required');
-		            $this->form_validation->set_rules('occupation', 'Occupation', 'required');
+		            // $this->form_validation->set_rules('highest_education', 'Highest Education', 'required');
+		            // $this->form_validation->set_rules('occupation', 'Occupation', 'required');
 				}
 
 				if ($this->db->get_where('frontend_settings', array('type' => 'language'))->row()->value == "yes")
 				{
-		            $this->form_validation->set_rules('mother_tongue', 'Mother Tongue', 'required');
+		            // $this->form_validation->set_rules('mother_tongue', 'Mother Tongue', 'required');
 				}
 
 				if ($this->db->get_where('frontend_settings', array('type' => 'residency_information'))->row()->value == "yes")
 				{
-		            $this->form_validation->set_rules('birth_country', 'Birth Country', 'required');
-		            $this->form_validation->set_rules('citizenship_country', 'Citizenship Country', 'required');
+		            // $this->form_validation->set_rules('birth_country', 'Birth Country', 'required');
+		            // $this->form_validation->set_rules('citizenship_country', 'Citizenship Country', 'required');
 				}
 
 				if ($this->db->get_where('frontend_settings', array('type' => 'spiritual_and_social_background'))->row()->value == "yes")
 				{
-		            $this->form_validation->set_rules('religion', 'Religion', 'required');
+		            // $this->form_validation->set_rules('religion', 'Religion', 'required');
 				}
 
 				if ($this->db->get_where('frontend_settings', array('type' => 'permanent_address'))->row()->value == "yes")
 				{
-		            $this->form_validation->set_rules('permanent_country', 'Permanent Country', 'required');
-		            $this->form_validation->set_rules('permanent_state', 'Permanent State', 'required');
+		            // $this->form_validation->set_rules('permanent_country', 'Permanent Country', 'required');
+		            // $this->form_validation->set_rules('permanent_state', 'Permanent State', 'required');
 				}
 
 	            if ($this->form_validation->run() == FALSE) {
