@@ -1397,6 +1397,25 @@ class Crud_model extends CI_Model
         return $listed_messaging_members = array_unique (array_merge ($message_array1, $message_array2), SORT_REGULAR);
     }
 
+    function get_listed_messaging_members_from_list($member_id, $member_to)
+    {
+        $arrayObject = '';
+       
+        $message_list1 = $this->db->select('message_thread_to AS list')->select('message_thread_id')->select('message_thread_time')->get_where('message_thread', array('message_thread_from' => $member_id, 'message_thread_to'=>$member_to))->row();
+       
+        $message_list2 = $this->db->select('message_thread_from AS list')->select('message_thread_id')->select('message_thread_time')->get_where('message_thread', array('message_thread_to' => $member_id, 'message_thread_from'=>$member_to))->row();
+        if($message_list1){
+            $arrayObject = array('message_thread_id' => $message_list1->message_thread_id, 'member_id' => $message_list1->list, 'message_thread_time' => $message_list1->message_thread_time);
+        }
+        if($message_list2){
+            $arrayObject = array('message_thread_id' => $message_list2->message_thread_id, 'member_id' => $message_list2->list, 'message_thread_time' => $message_list2->message_thread_time);
+    
+        }
+          
+        
+        return $arrayObject;
+    }
+
     function allsite_language($table,$limit,$start,$col,$dir)
     {
         $query = $this->db->limit($limit,$start)->order_by($col,$dir)->get($table);

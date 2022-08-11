@@ -71,7 +71,7 @@ foreach ($get_all_members as $member): ?>
                 </a>
             <?php endif ?>
             <h3 class="heading heading-5 strong-500 <?php if($member->membership == 1){echo 'mt-1';} else {echo'mt-1';}?>">
-                <a onclick="return goto_profile(<?=$member->member_id?>)" class="c-base-1"><?=$member->first_name." ".$member->last_name?></a>
+                <a onclick="return goto_profile(<?=$member->member_id?>)" class="c-base-1 m" id="nameinfo_<?=$member->member_id?>"><?=$member->first_name." ".$member->last_name?></a>
             </h3>
             <h4 class="heading heading-xs c-gray-light text-uppercase strong-400"><?=$education_and_career_data[0]['occupation']?></h4>
             <!-- <table class="table-striped table-bordered mb-2" style="font-size: 12px;">
@@ -119,19 +119,28 @@ foreach ($get_all_members as $member): ?>
                                 if (!$if_message) {
                                     $if_message = $this->db->get_where('message_thread', array('message_thread_from' => $this->session->userdata('member_id'), 'message_thread_to' => $member->member_id))->row();
                                 }
-
+                                
                                 if ($if_message) {
+                                    $user_id = $this->session->userdata('member_id');
+                                    $message_list1 = $this->Crud_model->get_listed_messaging_members_from_list($user_id, $member->member_id);
                                     $message_onclick = 0;
                                     $message_text = translate('messaging_enabled');
                                     $message_class = "li_active-mem";
+                                    $message_attr = ' onclick="open_message_box_global('.$message_list1['message_thread_id'].',this)" ';
+                                    $message_id =' data-memberName="'.$member->first_name." ".$member->last_name.'" data-memberID="'.$member->member_id.'" id="thread_global_'.$message_list1['message_thread_id'].'"';
+                                
                                 }
                                 else {
                                     $message_onclick = 1;
                                     $message_text = translate('enable_messaging');
                                     $message_class = "";
+                                    $message_id = ' id="message_a_'.$member->member_id.'"';
+                                    $message_attr =' onclick="open_blank_chat_message('.$member->member_id.')"';
+                                    // $message_attr ='onclick="return confirm_message($member->member_id)"';
                                 }
                             ?>
-                            <a class="<?=$message_class?>" id="message_a_<?=$member->member_id?>" <?php if ($message_onclick == 1){?>onclick="return confirm_message(<?=$member->member_id?>)"<?php }?>>
+                            
+                            <a class="<?=$message_class?>"  <?=$message_id?>  <?=$message_attr?> >
                                 
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                             </a>

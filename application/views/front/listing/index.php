@@ -360,6 +360,40 @@
         }
     });
 </script>
+<script>
+function open_message_box_global(thread_id, now){
+        $('.global-user-chat-box').css({display:"block"});
+        $("#msg_body").html("<div class='text-center' id='payment_loader'><i class='fa fa-refresh fa-5x fa-spin'></i></div>");
+        $("#msg_box_header").html("<a class='c-base-1' target='_blank' href='<?=base_url()?>home/member_profile/"+$('#thread_global_'+thread_id).attr('data-memberID')+"'>"+$('#thread_global_'+thread_id).attr('data-memberName')+"</a>");
+        $("#msg_refresh").html("<a onclick='refresh_msg("+thread_id+")'><i class='fa fa-refresh'></i> <?=translate('refresh')?></a>");
+        $.ajax({
+            type: "POST",
+            url: "<?=base_url()?>home/get_messages/"+thread_id,
+            cache: false,
+            success: function(response) {
+                // clearInterval(message_interval);
+                // var message_interval =  setInterval(function(){
+                //                             $("#msg_body").load('<?=base_url()?>home/get_messages/'+thread_id);
+                //                         }, 4000);
+                $("#msg_body").removeAttr("style");
+                // $("#message_text").removeAttr('disabled');
+                $("#message_text").val('');
+                $("#msg_body").html(response);
+            }
+        });
+    }
+    function open_blank_chat_message(id){
+        $('.global-user-chat-box').css({display:"block"});
+        
+        $("#msg_box_header").html("<a class='c-base-1' target='_blank' href='<?=base_url()?>home/member_profile/"+id+"'>"+$('#nameinfo_'+id).html()+"</a>");
+        $("#msg_refresh").html("<a onclick='refresh_msg("+id+")'><i class='fa fa-times' aria-hidden='true'></i> </a>");
+       
+        $("#msg_body").removeAttr("style");
+        $("#message_text").val('');
+        $("#msg_body").html('');
+                
+    }
+</script>
 <style>
     /* xs */
     .size-sm {
