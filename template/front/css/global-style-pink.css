@@ -12227,6 +12227,27 @@ span.global-cross-icon {
   
   color: #e7087f;
 }
+.direct-chat-text.direct-chat-text-dummy {
+  background: #f8d7da !important;
+  border-color: #f5c6cb !important;
+  color: #721c24 !important;
+}
+.direct-chat-text.direct-chat-text-dummy:after {
+  border-left-color: #f8d7da !important;
+}
+.direct-chat-text.direct-chat-text-dummy:before {
+  border-left-color: #f8d7da !important;
+}
+.upgrade-message-in-chatbox {
+  display: inline-flex;
+  color: #932832;
+  float: right;
+}
+.upgrade-message-in-chatbox>p {
+  text-align: right;
+  margin-right: -41px;
+  font-size: 13px;
+}
 @media screen and (min-width: 760px) {
   .timeline-item .timeline-info {
     float: left;

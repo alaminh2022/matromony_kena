@@ -35,8 +35,12 @@
                     } 
                 ?>
                 <!-- /.direct-chat-img -->
-                <div class="direct-chat-text">
+                <div class="direct-chat-text direct-chat-text-dummy">
                     <?=$message?>
+                    
+                </div>
+                <div class="upgrade-message-in-chatbox">
+                <p><a href="<?php echo base_url('home/plans'); ?>">Upgrade premium</a> for messages send and replies</p>
                 </div>
                 <!-- /.direct-chat-text -->
             </div>
