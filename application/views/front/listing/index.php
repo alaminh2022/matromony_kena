@@ -390,20 +390,42 @@ function open_message_box_global(thread_id, now){
         });
     }
     function open_blank_chat_message(id){
-        if(!chatlistOpen){
-            $('.global-user-chat-box').css({
-                right:"0"
-            })
-        }
-        $('.global-user-chat-box').css({display:"block"});
         
-        $("#msg_box_header").html("<a class='c-base-1' target='_blank' href='<?=base_url()?>home/member_profile/"+id+"'>"+$('#nameinfo_'+id).html()+"</a>");
-        $("#msg_refresh").html("<a class='cross-icon-in_chat' onclick='chat_box_remove("+id+")'><i class='fa fa-times' aria-hidden='true'></i> </a>");
-       
-        $("#msg_body").removeAttr("style");
-        $("#message_text").val('');
-        $("#msg_body").html('');
-        $('#msg_send_btn').attr('onclick', 'sendDummySms('+id+')');
+        if (isloggedin == "") {
+            $("#active_modal").modal("toggle");
+            $("#modal_header").html("<?php echo translate('please_log_in');?>");
+            $("#modal_body").html("<p class='text-center'><?php echo translate('please_log_in_to_enable_messaging');?></p>");
+            $("#modal_buttons").html("<button type='button' class='btn btn-danger btn-sm btn-shadow' data-dismiss='modal' style='width:25%'><?php echo translate('close');?></button> <a href='<?=base_url()?>home/login' class='btn btn-sm btn-base-1 btn-shadow' style='width:25%'><?php echo translate('log_in');?></a>");
+            return false;
+        }else{
+            if(rem_messages <= 0) {
+                if(!chatlistOpen){
+                    $('.global-user-chat-box').css({
+                        right:"0"
+                    })
+                }
+                $('.global-user-chat-box').css({display:"block"});
+                $("#msg_box_header").html("<a class='c-base-1' target='_blank' href='<?=base_url()?>home/member_profile/"+id+"'>"+$('#nameinfo_'+id).html()+"</a>");
+                $("#msg_refresh").html("<a class='cross-icon-in_chat' onclick='chat_box_remove("+id+")'><i class='fa fa-times' aria-hidden='true'></i> </a>");
+            
+                $("#msg_body").removeAttr("style");
+                $("#message_text").val('');
+                $("#msg_body").html('');
+                $('#msg_send_btn').attr('onclick', 'sendDummySms('+id+')');
+                return true;
+            } else {
+                $("#active_modal").modal("toggle");
+                $("#modal_header").html("<?php echo translate('confirm_enable_messaging');?>");
+                $("#modal_body").html("<p class='text-center'><b><?php echo translate('remaining_direct_message(s):');?>"+rem_messages+" <?php echo translate('times');?></b><br><span style='color:#DC0330;font-size:11px'>**N.B. <?php echo translate('enable_messaging_will_cost_1_from_your_remaining_direct_messages');?>**</span></p>");
+                $("#modal_buttons").html("<button type='button' class='btn btn-danger btn-sm btn-shadow' data-dismiss='modal' style='width:25%'><?php echo translate('close');?></button> <a href='#' id='confirm_message' class='btn btn-sm btn-base-1 btn-shadow' onclick='return enable_message("+id+")' style='width:25%'><?php echo translate('confirm');?></a>");
+                
+                return false;
+            }
+
+        }
+
+        
+        
                 
     }
     function sendDummySms(id){

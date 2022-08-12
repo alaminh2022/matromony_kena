@@ -135,7 +135,7 @@ foreach ($get_all_members as $member): ?>
                                     $message_text = translate('enable_messaging');
                                     $message_class = "";
                                     $message_id = ' id="message_a_'.$member->member_id.'"';
-                                    $message_attr =' onclick="open_blank_chat_message('.$member->member_id.')"';
+                                    $message_attr =' onclick="return open_blank_chat_message('.$member->member_id.')"';
                                     // $message_attr ='onclick="return confirm_message($member->member_id)"';
                                 }
                             ?>
