@@ -1273,7 +1273,12 @@ class Home extends CI_Controller {
 
         $this->load->view('front/profile/messaging/messages', $page_data);
     }
-
+    function get_dummy_messages($id)
+    {
+        $data['message'] = $this->input->post('message_text');
+        $this->load->view('front/profile/messaging/dummy_messages', $data);
+        recache();
+    }
     function send_message ($message_thread_id, $message_from, $message_to) {
         $data['message_thread_id'] = $message_thread_id;
         $data['message_from'] = $message_from;

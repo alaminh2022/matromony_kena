@@ -386,12 +386,29 @@ function open_message_box_global(thread_id, now){
         $('.global-user-chat-box').css({display:"block"});
         
         $("#msg_box_header").html("<a class='c-base-1' target='_blank' href='<?=base_url()?>home/member_profile/"+id+"'>"+$('#nameinfo_'+id).html()+"</a>");
-        $("#msg_refresh").html("<a onclick='refresh_msg("+id+")'><i class='fa fa-times' aria-hidden='true'></i> </a>");
+        $("#msg_refresh").html("<a onclick='chat_box_remove("+id+")'><i class='fa fa-times' aria-hidden='true'></i> </a>");
        
         $("#msg_body").removeAttr("style");
         $("#message_text").val('');
         $("#msg_body").html('');
+        $('#msg_send_btn').attr('onclick', 'sendDummySms('+id+')');
                 
+    }
+    function sendDummySms(id){
+        
+        $.ajax({
+            method:"POST",
+            url:'<?php echo base_url(); ?>home/get_dummy_messages/'+id,
+            data:$('#message_form').serialize(),
+            success:function(data){
+                $('#message_text').val('');
+                $("#msg_body").html(data);
+            }
+        });
+        
+    }
+    function chat_box_remove(id){
+        $('.global-user-chat-box').css({display:"none"});
     }
 </script>
 <style>
