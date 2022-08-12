@@ -362,10 +362,17 @@
 </script>
 <script>
 function open_message_box_global(thread_id, now){
+    if(!chatlistOpen){
+            $('.global-user-chat-box').css({
+                right:"0"
+            })
+        }
         $('.global-user-chat-box').css({display:"block"});
         $("#msg_body").html("<div class='text-center' id='payment_loader'><i class='fa fa-refresh fa-5x fa-spin'></i></div>");
         $("#msg_box_header").html("<a class='c-base-1' target='_blank' href='<?=base_url()?>home/member_profile/"+$('#thread_global_'+thread_id).attr('data-memberID')+"'>"+$('#thread_global_'+thread_id).attr('data-memberName')+"</a>");
-        $("#msg_refresh").html("<a onclick='refresh_msg("+thread_id+")'><i class='fa fa-refresh'></i> <?=translate('refresh')?></a>");
+        $("#msg_refresh").html("<a onclick='refresh_msg("+thread_id+")'><i class='fa fa-refresh'></i> <?=translate('refresh')?></a> <a class='cross-icon-in_chat' onclick='chat_box_remove("+thread_id+")'><i class='fa fa-times' aria-hidden='true'></i> </a>");
+        
+       
         $.ajax({
             type: "POST",
             url: "<?=base_url()?>home/get_messages/"+thread_id,
@@ -383,10 +390,15 @@ function open_message_box_global(thread_id, now){
         });
     }
     function open_blank_chat_message(id){
+        if(!chatlistOpen){
+            $('.global-user-chat-box').css({
+                right:"0"
+            })
+        }
         $('.global-user-chat-box').css({display:"block"});
         
         $("#msg_box_header").html("<a class='c-base-1' target='_blank' href='<?=base_url()?>home/member_profile/"+id+"'>"+$('#nameinfo_'+id).html()+"</a>");
-        $("#msg_refresh").html("<a onclick='chat_box_remove("+id+")'><i class='fa fa-times' aria-hidden='true'></i> </a>");
+        $("#msg_refresh").html("<a class='cross-icon-in_chat' onclick='chat_box_remove("+id+")'><i class='fa fa-times' aria-hidden='true'></i> </a>");
        
         $("#msg_body").removeAttr("style");
         $("#message_text").val('');

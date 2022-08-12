@@ -12242,11 +12242,15 @@ span.global-cross-icon {
   display: inline-flex;
   color: #932832;
   float: right;
+  width: 70%;
 }
 .upgrade-message-in-chatbox>p {
-  text-align: right;
-  margin-right: -41px;
-  font-size: 13px;
+  text-align: center;
+  font-size: 12px;
+}
+a.cross-icon-in_chat {
+  font-size: 14px;
+  color: #e7087f !important;
 }
 @media screen and (min-width: 760px) {
   .timeline-item .timeline-info {

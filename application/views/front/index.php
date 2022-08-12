@@ -211,17 +211,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!---Global chat script-->
 <?php if($page != 'profile/dashboard' && !empty($user_id)){ ?>
 <script type="text/javascript">
+    var chatlistOpen = false;
     $(document).ready(function(){
         $('#message_form').submit(function(){
             $('#msg_send_btn').click();
             return false;
         })
         $('.global-cross-icon').click(function(){
+                chatlistOpen = false;
                 $('.global-user-chat-list').css({display:"none"})
                 $('.global-chat-open-icon').css({display:"block"});
                 $('.global-user-chat-box').css({display:"none"});
         });
         $('.global-chat-open-icon').click(function(){
+            chatlistOpen = true;
             $('.global-user-chat-list').css({display:"block"});
             $('.global-chat-open-icon').css({display:"none"});
         })
