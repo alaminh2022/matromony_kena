@@ -100,6 +100,7 @@
                         $("#message_text").html("<i class='fa fa-comments-o'></i><?php echo translate('message_enabled');?>");
                         $("#message_a_"+id).css("cssText", "");
                         $("#success_alert").show();
+                        $('.mt-2 z-depth-2-bottom').submit();
                         $(".alert-success").html("<?php echo translate('you_have_enable_messaging_with_this_member!');?>");
                         $('#danger_alert').fadeOut('fast');
                         setTimeout(function() {
