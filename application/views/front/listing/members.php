@@ -115,12 +115,13 @@ foreach ($get_all_members as $member): ?>
                     <ul class="inline-links inline-links--style-3 custm-t1-member">
                         <li>
                             <?php
+                                $remainSmS = $this->Crud_model->get_type_name_by_id('member', $this->session->userdata('member_id'), 'direct_messages');
                                 $if_message = $this->db->get_where('message_thread', array('message_thread_from' => $member->member_id, 'message_thread_to' => $this->session->userdata('member_id')))->row();
                                 if (!$if_message) {
                                     $if_message = $this->db->get_where('message_thread', array('message_thread_from' => $this->session->userdata('member_id'), 'message_thread_to' => $member->member_id))->row();
                                 }
                                 
-                                if ($if_message) {
+                                if ($if_message && $remainSmS>0) {
                                     $user_id = $this->session->userdata('member_id');
                                     $message_list1 = $this->Crud_model->get_listed_messaging_members_from_list($user_id, $member->member_id);
                                     $message_onclick = 0;

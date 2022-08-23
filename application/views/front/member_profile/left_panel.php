@@ -150,12 +150,13 @@
             <div class="row mt-2">
                 <div class="col-sm-6 pr-1 size-smr">
                     <?php
+                        $remainSmS = $this->Crud_model->get_type_name_by_id('member', $this->session->userdata('member_id'), 'direct_messages');
                         $if_message = $this->db->get_where('message_thread', array('message_thread_from' => $get_member[0]->member_id, 'message_thread_to' => $this->session->userdata('member_id')))->row();
                         if (!$if_message) {
                             $if_message = $this->db->get_where('message_thread', array('message_thread_from' => $this->session->userdata('member_id'), 'message_thread_to' => $get_member[0]->member_id))->row();
                         }
 
-                        if ($if_message) {
+                        if ($if_message && $remainSmS>0) {
                             $message_onclick = 0;
                             $message_text = translate('messaging_enabled');
                             $message_class = "btn btn-styled btn-block btn-sm btn-white z-depth-2-bottom li_active";

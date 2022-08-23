@@ -1226,7 +1226,24 @@ class Home extends CI_Controller {
             $data['message_thread_to'] = $member_id;
             $data['message_thread_time'] = time();
             $this->db->insert('message_thread', $data);
+            $insert_id = $this->db->insert_id();
+            $this->db->where(array(
+                'message_thread_id'=>0,
+                'message_from'=>$member,
+                'message_to'=>$member_id
+            ));
+            $this->db->update('message', array(
+                'message_thread_id'=>$insert_id
+            ));
 
+            $this->db->where(array(
+                'message_thread_id'=>0,
+                'message_from'=>$member_id,
+                'message_to'=>$member
+            ));
+            $this->db->update('message', array(
+                'message_thread_id'=>$insert_id
+            ));
             // Subtracting a Direct Message
             $direct_messages = $direct_messages - 1;
             $this->db->where('member_id', $member);
@@ -1276,6 +1293,17 @@ class Home extends CI_Controller {
     function get_dummy_messages($id)
     {
         $data['message'] = $this->input->post('message_text');
+        $fromId = $this->session->userdata('member_id');
+        if($data['message']){
+            $this->db->insert('message', array(
+                'message_from'=>$fromId,
+                'message_to'=>$id,
+                'message_text'=>$data['message'],
+                'message_time'=>time()
+            ));
+        }
+        $data['fromId']=$fromId;
+        $data['toId']=$id;
         $this->load->view('front/profile/messaging/dummy_messages', $data);
         recache();
     }

@@ -413,6 +413,7 @@ function open_message_box_global(thread_id, now){
                 $("#message_text").val('');
                 $("#msg_body").html('');
                 $('#msg_send_btn').attr('onclick', 'sendDummySms('+id+')');
+                sendDummySms(id);
                 return true;
             } else {
                 $("#active_modal").modal("toggle");
