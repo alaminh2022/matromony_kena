@@ -112,6 +112,22 @@
                                     }
                                 </style>
                                 <div class="row">
+                                <?php
+                                  $paypal_set = $this->db->get_where('business_settings', array('type' => 'mpesa_set'))->row()->value;
+                                  if ($paypal_set=="ok"): ?>
+                                      <div class="col-4">
+                                          <div class="card mb-3 card-paypal" style="background: transparent;">
+                                              <a id="select_mpesa">
+                                                  <div class="card-image" style="text-align: center;">
+                                                      <img style="height: 102px;" src="<?=base_url()?>template/front/images/mpesa.png">
+                                                      <div class="text-center bg-base-1" style="height: 26px;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;">
+                                                          <span class="span-text" id="select_mpesa_text" style=""><?=translate('select')?></span>
+                                                      </div>
+                                                  </div>
+                                              </a>
+                                          </div>
+                                      </div>
+                                  <?php endif ?>
                                   <?php
                                   $paypal_set = $this->db->get_where('business_settings', array('type' => 'paypal_set'))->row()->value;
                                   if ($paypal_set=="ok"): ?>
@@ -603,7 +619,7 @@
                                         });
                                     });
 
-                                    $('#select_pesapal').click();
+                                    // $('#select_pesapal').click();
                                     $('#pesapal_head_lock').click(function(){
                                         if (confirm('Are you sure? you want to leave payment page,(if you leave this page befoere your payment confirmation,  you will be face payment confirmation issue) after payment success it automatic redirect  ')) {
                                             history.back();
@@ -622,6 +638,10 @@
         </div>
     </div>
 </section>
+<?php 
+$userData = $this->db->get_where("member", array("member_id" => $this->session->userdata('member_id')))->row();
+
+?>
 <script>
     $(document).ready(function(e) {
         $("#select_paypal").click(function(){
@@ -649,6 +669,45 @@
             $( ".cp_method_2_detail").addClass('d-none');
             $( ".cp_method_3_detail").addClass('d-none');
             $( ".cp_method_4_detail").addClass('d-none');
+        });
+        $("#select_mpesa").click(function(){
+            $("#select_mpesa_text").html("<?php echo translate('selected')?>");
+            $("#select_paypal_text").html("<?php echo translate('select')?>");
+            $("#select_stripe_text").html("<?php echo translate('select')?>");
+            $("#select_pum_text").html("<?php echo translate('select')?>");
+            $("#select_instamojo_text").html("<?php echo translate('select')?>");
+            $("#select_cp_method_1_text").html("<?php echo translate('select')?>");
+            $("#select_cp_method_3_text").html("<?php echo translate('select')?>");
+            $("#select_cp_method_4_text").html("<?php echo translate('select')?>");
+
+            $(".card-cp_method_2").css("border", "1px solid #24242D");
+            $(".card-paypal").css("border", "1px solid rgba(0, 0, 0, 0.05)");
+            $(".card-stripe").css("border", "1px solid rgba(0, 0, 0, 0.05)");
+            $(".card-pum").css("border", "1px solid rgba(0, 0, 0, 0.05)");
+            $(".card-instamojo").css("border", "1px solid rgba(0, 0, 0, 0.05)");
+            $(".card-cp_method_1").css("border", "1px solid rgba(0, 0, 0, 0.05)");
+            $(".card-cp_method_3").css("border", "1px solid rgba(0, 0, 0, 0.05)");
+            $(".card-cp_method_4").css("border", "1px solid rgba(0, 0, 0, 0.05)");
+
+            $("#active_modal").modal({backdrop: 'static', keyboard: false});
+            $("#modal_header").html("<?php echo translate('MPesa_Payment');?>");
+            var htmlpage ='';
+                htmlpage +='<div class="mpesa-pay-form"><form id="mpesapayment_form_aid" onsubmit="return mpesapaymentSubmit($(this).serialize())" method="post" action="<?php echo base_url(); ?>/home/mPesaPayment">';
+                    htmlpage +='<div class="form-group">';
+                    htmlpage +='    <label for="transaction_id">Amount</label>';
+                    htmlpage +='    <input class="form-control " required  value="<?php echo $selected_plan[0]->amount; ?>KES"  readonly type="text" placeholder="Amount">';
+                    htmlpage +='</div>';
+                    htmlpage +='<div class="form-group">';
+                    htmlpage +='    <label for="transaction_id">Phone Number</label>';
+                    htmlpage +='    <input class="form-control " id="mpesa_phone" required name="mpesa_phone" value="<?php echo $userData->mobile; ?>" type="text" placeholder="Enter Phone Number">';
+                    htmlpage +='</div>';
+                    htmlpage +='<div class="form-group">';
+                    htmlpage +='    <input class="text-center bg-base-1"   type="submit" value="Payment submit">';
+                    htmlpage +='</div>';
+                htmlpage +='</form></div>';
+            $("#modal_body").html(htmlpage);
+            $("#modal_buttons").html("");
+            $('#modal_close').css({display:"none"});
         });
         $("#select_pum").click(function(){
             $("#select_pum_text").html("<?php echo translate('selected')?>");
@@ -861,4 +920,21 @@
             }
         });
     });
+</script>
+<script>
+    function mpesapaymentSubmit(datas){
+         $("#modal_body").html('<div class="text-center" id="payment_loader"><i class="fa fa-refresh fa-5x fa-spin"></i><p>Please Wait ...</p></div>');
+       
+        var planId = '<?php echo $selected_plan[0]->plan_id; ?>';
+        $.ajax({
+            method:"POST",
+            url:'<?php echo base_url(); ?>home/mPesaPayment/'+planId,
+            data:datas,
+            dataType:"JSON",
+            success:function(response){
+                console.log(response);
+            }
+        })
+        return false;
+    }
 </script>

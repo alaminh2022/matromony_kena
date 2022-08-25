@@ -5539,6 +5539,37 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('alert', 'failed_edit');
 			}
 
+		}elseif( $para1=='update_mpesa'){
+			$mpesa_set = $this->input->post('mpesa_set');
+			if (isset($mpesa_set)) {
+				$data1['value'] = "ok";
+			} else {
+				$data1['value'] = "no";
+			}
+			$data2['value'] = $this->input->post('mpesa_consumer_key');
+			$data3['value'] = $this->input->post('mpesa_consumer_secret_key');
+			$data4['value'] = $this->input->post('mpesa_account_type');
+
+			$this->db->where('type','mpesa_set');
+			$result = $this->db->update('business_settings', $data1);
+
+			$this->db->where('type','mpesa_consumer_key');
+			$result = $this->db->update('business_settings', $data2);
+
+			$this->db->where('type','mpesa_consumer_secret_key');
+			$result = $this->db->update('business_settings', $data3);
+
+			$this->db->where('type','mpesa_account_type');
+			$result = $this->db->update('business_settings', $data4);
+
+			recache();
+
+			if ($result) {
+				$this->session->set_flashdata('alert', 'edit');
+			}
+			else {
+				$this->session->set_flashdata('alert', 'failed_edit');
+			}
 		}
 		elseif ($para1=="update_pum") {
 

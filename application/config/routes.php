@@ -53,4 +53,5 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['Dashboard']='home/listing';
 $route['pesapal-response']='home/pesapalResponse';
+$route['mpesa-callback-response']='home/mpesaResponse';
 $route['translate_uri_dashes'] = FALSE;

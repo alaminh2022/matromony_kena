@@ -38,6 +38,58 @@
 			<?php endif ?>
 			<div class="panel-body">
 				<div class="row">
+					<!-- Mpesa -->
+					<div class="col-md-6">
+						<div class="panel panel-dark">
+						    <div class="panel-heading">
+						        <h3 class="panel-title"><?= translate('Mpesa_settings')?></h3>
+						    </div>
+						    <div class="panel-body">
+
+					    		<form class="form-horizontal" id="mpesa_settings_form" method="POST" action="<?=base_url()?>admin/update_payments/update_mpesa">
+					    			<div class="form-group">
+										<label class="col-sm-3 control-label" for="mpesa_activation"><b><?= translate('activation')?></b></label>
+										<div class="col-sm-8">
+											<div class="checkbox">
+								                <input id="mpesa_set" name="mpesa_set" class="magic-checkbox" type="checkbox" <?php if($this->db->get_where('business_settings', array('type' => 'mpesa_set'))->row()->value == "ok"){ ?>checked<?php } ?>>
+								                <label for="mpesa_set"></label>
+								            </div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="mpesa_consumer_key"><b><?= translate('Consumer_Key')?> <span class="text-danger">*</span></b></label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" name="mpesa_consumer_key" value="<?=$this->db->get_where('business_settings', array('type' => 'mpesa_consumer_key'))->row()->value;?>" placeholder="<?php echo translate('your_secret_key')?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="mpesa_consumer_secret_key"><b><?= translate('Consumer_Secret')?> <span class="text-danger">*</span></b></label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" name="mpesa_consumer_secret_key" value="<?=$this->db->get_where('business_settings', array('type' => 'mpesa_consumer_secret_key'))->row()->value;?>" placeholder="<?php echo translate('your_publishable_key')?>">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="phone"><b><?= translate('account_type')?></b></label>
+										<div class="col-sm-8">
+											<select class="form-control" name="mpesa_account_type">
+												<?php
+													$paypal_account_type = $this->db->get_where('business_settings', array('type' => 'mpesa_account_type'))->row()->value;
+												?>
+									            <option value="sandbox" <?php if ($paypal_account_type == "sandbox"){?> selected<?php } ?>> <?= translate('sandbox')?></option>
+									            <option value="original" <?php if ($paypal_account_type == "original"){?> selected<?php } ?>> <?= translate('original')?></option>
+									        </select>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-8 text-right">
+											<button type="submit" class="btn btn-primary btn-sm btn-labeled fa fa-save"><?php echo translate('save')?></button>
+										</div>
+									</div>
+								</form>
+						    </div>
+						</div>
+					</div>
 					<!-- Pesapal -->
 					<div class="col-md-6">
 						<div class="panel panel-dark">

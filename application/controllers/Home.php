@@ -3865,8 +3865,72 @@ class Home extends CI_Controller {
         
         
     }
-
-
+    function mpesaResponse()
+    {
+        header("Content-Type: application/json");
+        $response = '{
+            "ResultCode": 0, 
+            "ResultDesc": "Confirmation Received Successfully"
+        }';
+    
+        // DATA
+        $mpesaResponse = file_get_contents('php://input');
+    
+        // log the response
+        $logFile = "M_PESAConfirmationResponse.txt";
+    
+        // write to file
+        $log = fopen($logFile, "a");
+    
+        fwrite($log, $mpesaResponse);
+        fclose($log);
+    
+        echo $response;
+    }
+    function mPesaPayment($planId)
+    {
+        $phone = $this->input->post('mpesa_phone');
+        $member_id = $this->session->userdata('member_id');  
+        $plan_id = $planId;     
+        $this->load->library('mpesa');
+        $tokenResponse =$this->mpesa->getAuthToken();
+        
+        if($tokenResponse['status']){
+            $token = $tokenResponse['token'];
+            $this->session->set_userdata('mpesa_token', $token);
+            $amount = $this->db->get_where('plan', array('plan_id' => $plan_id))->row()->amount;
+            $registeripn = $this->mpesa->initiatePayment($token, 
+                array(
+                    'member_id'=>$member_id,
+                    'plan_id'=>$plan_id,
+                    'phone'=>$phone,
+                    'amount'=>$amount
+                )
+            );
+            
+            if($registeripn['status']){
+                
+                $returnResponse = array(
+                    'status'=>true,
+                    'data'=>$registeripn['data']
+                );
+                echo json_encode($returnResponse); 
+            }else{
+                $returnResponse = array(
+                    'status'=>false,
+                    'msg'=>'something went wrong !'
+                );
+                echo json_encode($returnResponse); 
+            }
+            
+        }else{
+            $returnResponse = array(
+                'status'=>false,
+                'msg'=>'consumer_key or consumer_secret invaild'
+            );
+            echo json_encode($returnResponse);
+        }
+    }
     function cache_setup_info($connector,$selector,$select,$type,$ready=''){
         $ta = time();
         if($ready !== 'post'){
