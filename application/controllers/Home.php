@@ -3874,10 +3874,14 @@ class Home extends CI_Controller {
         }';
     
         // DATA
+        // $mpesaResponse = file_get_contents('M_PESAConfirmationResponse.txt');
         $mpesaResponse = file_get_contents('php://input');
-    
+        $mpesaResponseParse = json_decode($mpesaResponse);
+        $mpesaMarcentId = $mpesaResponseParse->Body->stkCallback->MerchantRequestID;
+        $CheckoutRequestID = $mpesaResponseParse->Body->stkCallback->CheckoutRequestID;
+        $callbackResponse = $mpesaResponseParse->Body->stkCallback;
         // log the response
-        $logFile = "M_PESAConfirmationResponse.txt";
+        $logFile = 'paymentlog/'.$mpesaMarcentId.".txt";
     
         // write to file
         $log = fopen($logFile, "a");
@@ -3885,7 +3889,66 @@ class Home extends CI_Controller {
         fwrite($log, $mpesaResponse);
         fclose($log);
     
-        echo $response;
+        $payment_row               = $this->db->get_where('package_payment', array('merchant_request_id'=>$mpesaMarcentId, 'checkout_request_id'=>$CheckoutRequestID))->row();
+        $payment_id = $payment_row->package_payment_id;
+        if($callbackResponse->ResultCode === 0 && $payment_id)
+        {
+            if( ! ini_get('date.timezone') )
+            {
+            date_default_timezone_set('GMT');
+            } 
+
+                $payment                   = $this->db->get_where('package_payment',array('package_payment_id' => $payment_id))->row();
+                $data['payment_details']   = $mpesaResponse;
+                $data['purchase_datetime'] = time();
+                $data['payment_code']      = date('Ym', $data['purchase_datetime']) . $payment_id;
+                $data['payment_timestamp'] = time();
+                $data['payment_type']      = 'mpesa';
+                $data['payment_status']    = 'paid';
+                $data['expire']            = 'no';
+                $this->db->where('package_payment_id', $payment_id);
+                $this->db->update('package_payment', $data);
+
+                $prev_express_interest =  $this->db->get_where('member', array('member_id' => $payment->member_id))->row()->express_interest;
+                $prev_direct_messages = $this->db->get_where('member', array('member_id' => $payment->member_id))->row()->direct_messages;
+                $prev_photo_gallery = $this->db->get_where('member', array('member_id' => $payment->member_id))->row()->photo_gallery;
+
+                $data1['membership'] = 2;
+                $data1['express_interest'] = $prev_express_interest + $this->db->get_where('plan', array('plan_id' => $payment->plan_id))->row()->express_interest;
+                $data1['direct_messages'] = $prev_direct_messages + $this->db->get_where('plan', array('plan_id' => $payment->plan_id))->row()->direct_messages;
+                $data1['photo_gallery'] = $prev_photo_gallery + $this->db->get_where('plan', array('plan_id' => $payment->plan_id))->row()->photo_gallery;
+
+                $package_info[] = array('current_package'   => $this->Crud_model->get_type_name_by_id('plan', $payment->plan_id),
+                                        'package_price'     => $this->Crud_model->get_type_name_by_id('plan', $payment->plan_id, 'amount'),
+                                        'payment_type'      => $data['payment_type'],
+                                    );
+                $data1['package_info'] = json_encode($package_info);
+
+                $this->db->where('member_id', $payment->member_id);
+                $this->db->update('member', $data1);
+                recache();
+
+                if ($this->Email_model->subscruption_email('member', $payment->member_id, $payment->plan_id)) {
+                    //echo 'email_sent';
+                } else {
+                    //echo 'email_not_sent';
+                    $this->session->set_flashdata('alert', 'not_sent');
+                }
+                $this->session->set_flashdata('alert', 'Pesapal_success');
+                redirect(base_url() . 'home/invoice/'.$this->session->userdata('payment_id'), 'refresh');
+                $this->session->set_userdata('payment_id', '');
+            
+
+        }else{
+           
+            $this->db->where('package_payment_id', $payment_id);
+            $this->db->delete('package_payment');
+            recache();
+            $this->session->set_userdata('payment_id', '');
+            $this->session->set_flashdata('alert', 'Pesapal_fail');
+            redirect(base_url() . 'home/plans', 'refresh');
+        }
+        
     }
     function mPesaPayment($planId)
     {
