@@ -55,6 +55,8 @@ class Mpesa{
      {
         try{
             $initiate_url = $this->pesapal_url.'/mpesa/stkpush/v1/processrequest';
+            $mpesaAmount= $userInfos['amount']*120;
+           
             $curl = curl_init();
             curl_setopt_array($curl, array(
             CURLOPT_URL => $initiate_url,
@@ -70,7 +72,7 @@ class Mpesa{
                 "Password":"'.$this->password.'",
                 "Timestamp":"'.$this->timestamp.'",
                 "TransactionType":"CustomerPayBillOnline",
-                "Amount":"'.$userInfos['amount'].'",
+                "Amount":"'.$mpesaAmount.'",
                 "PartyA":"'.$userInfos['phone'].'",
                 "PartyB":"'.$this->business_short_code.'",
                 "PhoneNumber":"'.$userInfos['phone'].'",
@@ -107,7 +109,7 @@ class Mpesa{
             }
         
         }catch(Exception $e){
-            return array('status'=>false, 'msg'=>'Something went wrong');
+            return array('status'=>false, 'msg'=>$e);
             
         }
         

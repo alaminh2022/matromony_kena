@@ -695,7 +695,7 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
                 htmlpage +='<div class="mpesa-pay-form"><form id="mpesapayment_form_aid" onsubmit="return mpesapaymentSubmit($(this).serialize())" method="post" action="<?php echo base_url(); ?>/home/mPesaPayment">';
                     htmlpage +='<div class="form-group">';
                     htmlpage +='    <label for="transaction_id">Amount</label>';
-                    htmlpage +='    <input class="form-control " required  value="<?php echo $selected_plan[0]->amount; ?>KES"  readonly type="text" placeholder="Amount">';
+                    htmlpage +='    <input class="form-control " required  value="<?php echo $selected_plan[0]->amount*120; ?>ksh"  readonly type="text" placeholder="Amount">';
                     htmlpage +='</div>';
                     htmlpage +='<div class="form-group">';
                     htmlpage +='    <label for="transaction_id">Phone Number</label>';

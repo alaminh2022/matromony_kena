@@ -3998,7 +3998,7 @@ class Home extends CI_Controller {
             }else{
                 $returnResponse = array(
                     'status'=>false,
-                    'msg'=>'something went wrong !'
+                    'msg'=>$registeripn['msg']
                 );
                 echo json_encode($returnResponse); 
             }
