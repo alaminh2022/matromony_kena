@@ -3950,6 +3950,23 @@ class Home extends CI_Controller {
         }
         
     }
+    function mPesaPayment_checker($paymentId)
+    {
+        $response = $this->db->get_where('package_payment', array('package_payment_id'=>$paymentId))->row();
+        if($response->payment_status == 'paid'){
+            $returnResponse = array(
+                'status'=>true,
+                'msg'=>'payment success'
+            );
+            echo json_encode($returnResponse);
+        }else{
+            $returnResponse = array(
+                'status'=>false,
+                'msg'=>'payment processing'
+            );
+            echo json_encode($returnResponse);
+        }
+    }
     function mPesaPayment($planId)
     {
         $phone = $this->input->post('mpesa_phone');

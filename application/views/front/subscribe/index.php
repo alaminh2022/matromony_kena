@@ -923,8 +923,18 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
 </script>
 <script>
     function mpesapaymentSubmit(datas){
-         $("#modal_body").html('<div class="text-center" id="payment_loader"><i class="fa fa-refresh fa-5x fa-spin"></i><p>Please Wait ...</p></div>');
-       
+        var phoneObj= datas.split('=');
+        var strFirstThree = parseInt(phoneObj[1].substring(0,3));
+        if(strFirstThree != 254){
+            $("#danger_alert").show();
+            $(".alert-danger").html("<?php echo translate('Your_phone_number_is_not_valid!_(Add_254)_before_your_phone_number')?>");
+            $('#success_alert').fadeOut('fast');
+            setTimeout(function() {
+                $('#danger_alert').fadeOut('fast');
+            }, 5000); // <-- time in milliseconds
+            return false;
+        }
+        $("#modal_body").html('<div class="text-center" id="payment_loader"><i class="fa fa-refresh fa-5x fa-spin"></i><p>Please Wait ...</p></div>');
         var planId = '<?php echo $selected_plan[0]->plan_id; ?>';
         $.ajax({
             method:"POST",
@@ -932,7 +942,24 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
             data:datas,
             dataType:"JSON",
             success:function(response){
-                console.log(response);
+                if(response.status){
+                    clearInterval(message_interval);
+                var message_interval =  setInterval(function(){
+                        $.ajax({
+                            method:"POST",
+                            url:'<?php echo base_url(); ?>home/mPesaPayment_checker/'+response.data.paymentTempId,
+                            data:datas,
+                            dataType:"JSON",
+                            success:function(dataRes){
+                                if(dataRes.status){
+                                    window.location.href='<?php echo base_url('home/invoice/') ?>'+response.data.paymentTempId;
+                                }
+                            }
+                        })
+                        }, 4000);
+                }else{
+                    $("#modal_body").html('<div class="text-center" ><p>Payment Request failed Please <a href="<?php base_url('home/plans/subscribe/'); ?>'+planId+'"> try again</a> </p></div>');
+                }
             }
         })
         return false;

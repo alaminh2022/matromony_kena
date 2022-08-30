@@ -100,6 +100,7 @@ class Mpesa{
                     'checkout_request_id'=>$dataResponse->CheckoutRequestID
                 ));
                 $paymentTempId= $this->db->insert_id();
+                $dataResponse->paymentTempId = $paymentTempId;
                 return array('status'=>true, 'data'=>$dataResponse);
             }else{
                 return array('status'=>false, 'msg'=>$dataResponse);
