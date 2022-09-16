@@ -5570,6 +5570,37 @@ class Admin extends CI_Controller {
 			else {
 				$this->session->set_flashdata('alert', 'failed_edit');
 			}
+		}elseif( $para1=='update_dpo'){
+			$dpo_set = $this->input->post('dpo_set');
+			if (isset($dpo_set)) {
+				$data1['value'] = "ok";
+			} else {
+				$data1['value'] = "no";
+			}
+			$data2['value'] = $this->input->post('dpo_company_token');
+			$data3['value'] = $this->input->post('dpo_service_type');
+			$data4['value'] = $this->input->post('dpo_account_type');
+
+			$this->db->where('type','dpo_set');
+			$result = $this->db->update('business_settings', $data1);
+
+			$this->db->where('type','dpo_company_token');
+			$result = $this->db->update('business_settings', $data2);
+
+			$this->db->where('type','dpo_service_type');
+			$result = $this->db->update('business_settings', $data3);
+
+			$this->db->where('type','dpo_account_type');
+			$result = $this->db->update('business_settings', $data4);
+
+			recache();
+
+			if ($result) {
+				$this->session->set_flashdata('alert', 'edit');
+			}
+			else {
+				$this->session->set_flashdata('alert', 'failed_edit');
+			}
 		}
 		elseif ($para1=="update_pum") {
 

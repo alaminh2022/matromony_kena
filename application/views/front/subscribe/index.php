@@ -113,6 +113,22 @@
                                 </style>
                                 <div class="row">
                                 <?php
+                                  $paypal_set = $this->db->get_where('business_settings', array('type' => 'dpo_set'))->row()->value;
+                                  if ($paypal_set=="ok"): ?>
+                                      <div class="col-4">
+                                          <div class="card mb-3 card-paypal" style="background: transparent;">
+                                              <a id="select_dpo">
+                                                  <div class="card-image" style="text-align: center;">
+                                                      <img style="height: 102px;" src="<?=base_url()?>template/front/images/dpo.svg">
+                                                      <div class="text-center bg-base-1" style="height: 26px;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;">
+                                                          <span class="span-text" id="select_dpo_text" style=""><?=translate('select')?></span>
+                                                      </div>
+                                                  </div>
+                                              </a>
+                                          </div>
+                                      </div>
+                                  <?php endif ?>
+                                <?php
                                   $paypal_set = $this->db->get_where('business_settings', array('type' => 'mpesa_set'))->row()->value;
                                   if ($paypal_set=="ok"): ?>
                                       <div class="col-4">
@@ -644,6 +660,55 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
 ?>
 <script>
     $(document).ready(function(e) {
+        $('#select_dpo').on('click', function(e) {
+            const para = document.getElementById("pesapal_head_lock");
+            $(para).css({
+                position:"fixed",
+                width:"100%",
+                background:"#ff000000",
+                height:"79px",
+                top:"0",
+                left:"0",
+                zIndex:"10000",
+            });
+            
+            $("#payment_loader").show();
+            $("#payment_section").hide();
+            var url = '<?php echo base_url(); ?>home/dpoPayment';
+            $.ajax({
+                type:"POST",
+                url:url,
+                data:$('#payment_form').serialize(),
+                dataType:"json",
+                success:function(response){
+                        if(response.status){
+                            $('#pesapalifrem').css({display:"block"});
+                            $('#pesapalifrem_other').css({display:"none"});
+                            var token  = response.data.transToken;
+                            var urldpo ='https://secure.3gdirectpay.com/payv2.php?ID='+token;
+                            // var urldpo ='https://secure1.sandbox.3gdirectpay.com/payv2.php?ID='+token;
+                            window.location.href = urldpo;
+                            // var htmliFreme =`<iframe src="${payData.redirect_url}" ></iframe>`;
+                            // $('#pesapalifrem').html(htmliFreme);
+                        }else{
+                            $("#payment_loader").hide();
+                            $("#payment_section").show();
+                        }
+                }
+
+            });
+        });
+
+        // $('#select_pesapal').click();
+        $('#pesapal_head_lock').click(function(){
+            if (confirm('Are you sure? you want to leave payment page,(if you leave this page befoere your payment confirmation,  you will be face payment confirmation issue) after payment success it automatic redirect  ')) {
+                history.back();
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(e) {
         $("#select_paypal").click(function(){
             $("#select_paypal_text").html("<?php echo translate('selected')?>");
             $("#select_stripe_text").html("<?php echo translate('select')?>");
@@ -670,6 +735,9 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
             $( ".cp_method_3_detail").addClass('d-none');
             $( ".cp_method_4_detail").addClass('d-none');
         });
+        $('#select_dpo').click(function(){
+            
+        })
         $("#select_mpesa").click(function(){
             $("#select_mpesa_text").html("<?php echo translate('selected')?>");
             $("#select_paypal_text").html("<?php echo translate('select')?>");

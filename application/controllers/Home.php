@@ -3865,6 +3865,47 @@ class Home extends CI_Controller {
         
         
     }
+
+    function dpoPayment()
+    {
+        $member_id = $this->session->userdata('member_id');  
+        $plan_id = $this->input->post('plan_id'); 
+        $amount = $this->db->get_where('plan', array('plan_id' => $plan_id))->row()->amount;
+        $name = $this->db->get_where('plan', array('plan_id' => $plan_id))->row()->name;
+        $member = $this->db->get_where('member', array('member_id' => $member_id))->row();
+        $this->load->library('dpo');
+        $data = [
+            'orderItems'        => $name,
+            'paymentAmount'     => $amount,
+            'paymentCurrency'   => 'KES',
+            'companyRef'        => '',
+            'customerDialCode'  => '',
+            'customerZip'       => '',
+            'customerCountry'   => 'KE',
+            'customerFirstName' =>  $member->first_name,
+            'customerLastName'  =>  $member->last_name,
+            'customerAddress'   =>  $this->session->userdata('member_email'),
+            'customerCity'      => '',
+            'customerPhone'     =>  $member->mobile,
+            'customerEmail'     =>  $this->session->userdata('member_email'),
+            
+        ];
+        $tokenResponse = $this->dpo->createToken($data);
+       if($tokenResponse['success']){
+            $returnResponse = array(
+                'status'=>true,
+                'data'=>$tokenResponse
+            );
+            echo json_encode($returnResponse);
+       }else{
+            $returnResponse = array(
+                'status'=>false,
+                'data'=>'Payment failed'
+            );
+            echo json_encode($returnResponse);
+       }
+        
+    }
     function mpesaResponse()
     {
         header("Content-Type: application/json");

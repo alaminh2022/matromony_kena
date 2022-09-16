@@ -38,6 +38,58 @@
 			<?php endif ?>
 			<div class="panel-body">
 				<div class="row">
+					<!-- DPO -->
+					<div class="col-md-6">
+						<div class="panel panel-dark">
+						    <div class="panel-heading">
+						        <h3 class="panel-title"><?= translate('Dpo_settings')?></h3>
+						    </div>
+						    <div class="panel-body">
+
+					    		<form class="form-horizontal" id="dpo_settings_form" method="POST" action="<?=base_url()?>admin/update_payments/update_dpo">
+					    			<div class="form-group">
+										<label class="col-sm-3 control-label" for="dpo_activation"><b><?= translate('activation')?></b></label>
+										<div class="col-sm-8">
+											<div class="checkbox">
+								                <input id="dpo_set" name="dpo_set" class="magic-checkbox" type="checkbox" <?php if($this->db->get_where('business_settings', array('type' => 'dpo_set'))->row()->value == "ok"){ ?>checked<?php } ?>>
+								                <label for="dpo_set"></label>
+								            </div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="dpo_company_token"><b><?= translate('Company_token')?> <span class="text-danger">*</span></b></label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" name="dpo_company_token" value="<?=$this->db->get_where('business_settings', array('type' => 'dpo_company_token'))->row()->value;?>" placeholder="<?php echo translate('company_token')?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="dpo_service_type"><b><?= translate('Service_type')?> <span class="text-danger">*</span></b></label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" name="dpo_service_type" value="<?=$this->db->get_where('business_settings', array('type' => 'dpo_service_type'))->row()->value;?>" placeholder="<?php echo translate('service_type')?>">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="phone"><b><?= translate('account_type')?></b></label>
+										<div class="col-sm-8">
+											<select class="form-control" name="dpo_account_type">
+												<?php
+													$paypal_account_type = $this->db->get_where('business_settings', array('type' => 'dpo_account_type'))->row()->value;
+												?>
+									            <option value="sandbox" <?php if ($paypal_account_type == "sandbox"){?> selected<?php } ?>> <?= translate('sandbox')?></option>
+									            <option value="original" <?php if ($paypal_account_type == "original"){?> selected<?php } ?>> <?= translate('original')?></option>
+									        </select>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-8 text-right">
+											<button type="submit" class="btn btn-primary btn-sm btn-labeled fa fa-save"><?php echo translate('save')?></button>
+										</div>
+									</div>
+								</form>
+						    </div>
+						</div>
+					</div>
 					<!-- Mpesa -->
 					<div class="col-md-6">
 						<div class="panel panel-dark">
