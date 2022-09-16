@@ -3877,7 +3877,7 @@ class Home extends CI_Controller {
         $data = [
             'orderItems'        => $name,
             'paymentAmount'     => $amount,
-            'paymentCurrency'   => 'KES',
+            'paymentCurrency'   => 'USD',
             'companyRef'        => '',
             'customerDialCode'  => '',
             'customerZip'       => '',
