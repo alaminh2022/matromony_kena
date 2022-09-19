@@ -75,7 +75,7 @@ class Mpesa{
                 "TransactionType":"CustomerPayBillOnline",
                 "Amount":"'.$mpesaAmount.'",
                 "PartyA":"'.$userInfos['phone'].'",
-                "PartyB":"'.$this->business_short_code.'",
+                "PartyB":"4095655",
                 "PhoneNumber":"'.$userInfos['phone'].'",
                 "CallBackURL":"'.$this->callback_url.'",
                 "AccountReference":"4095655",
