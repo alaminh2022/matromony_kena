@@ -18,7 +18,7 @@ class Mpesa{
         $this->callback_url= base_url().'mpesa-callback-response';
         $this->consumer_key = $CI->db->get_where('business_settings',array('type'=>'mpesa_consumer_key'))->row()->value;
         $this->consumer_secret = $CI->db->get_where('business_settings',array('type'=>'mpesa_consumer_secret_key'))->row()->value;
-        $this->business_short_code ='4095655';
+        $this->business_short_code ='174379';
         $Passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
         $this->timestamp = date('YmdHis'); 
         $this->password = base64_encode($this->business_short_code.$Passkey.$this->timestamp);
@@ -37,6 +37,7 @@ class Mpesa{
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($curl, CURLOPT_HEADER, FALSE);
             curl_setopt($curl, CURLOPT_USERPWD, $this->consumer_key.':'.$this->consumer_secret);
+            // curl_setopt($curl, CURLOPT_USERPWD, '2B37GesV6nNBtXvGuqGlkM95Z5O6ApzO:NdNJGuzyv7X7a4pd');
             $result = curl_exec($curl);
             $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             $result = json_decode($result);
@@ -77,7 +78,7 @@ class Mpesa{
                 "PartyB":"'.$this->business_short_code.'",
                 "PhoneNumber":"'.$userInfos['phone'].'",
                 "CallBackURL":"'.$this->callback_url.'",
-                "AccountReference":"CompanyXLsTD",
+                "AccountReference":"4095655",
                 "TransactionDesc":"Paymesnt of X"
             }',
             CURLOPT_HTTPHEADER => array(
