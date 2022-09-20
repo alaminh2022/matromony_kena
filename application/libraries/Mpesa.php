@@ -18,8 +18,8 @@ class Mpesa{
         $this->callback_url= base_url().'mpesa-callback-response';
         $this->consumer_key = $CI->db->get_where('business_settings',array('type'=>'mpesa_consumer_key'))->row()->value;
         $this->consumer_secret = $CI->db->get_where('business_settings',array('type'=>'mpesa_consumer_secret_key'))->row()->value;
-        $this->business_short_code ='174379';
-        $Passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
+        $this->business_short_code ='4095655';
+        $Passkey = 'acaf2d849094cb23e1d4bcaa2c8ec91adac51d5b4965c005aa7e7be6dbcf8510';
         $this->timestamp = date('YmdHis'); 
         $this->password = base64_encode($this->business_short_code.$Passkey.$this->timestamp);
 
