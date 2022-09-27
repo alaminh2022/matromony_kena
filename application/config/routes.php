@@ -54,4 +54,6 @@ $route['404_override'] = '';
 $route['Dashboard']='home/listing';
 $route['pesapal-response']='home/pesapalResponse';
 $route['mpesa-callback-response']='home/mpesaResponse';
+$route['dpo-success']   = 'home/dpoSuccess';
+$route['dpo-failed']   = 'home/dpoFailed';
 $route['translate_uri_dashes'] = FALSE;

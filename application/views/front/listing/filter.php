@@ -131,7 +131,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <label for="" class="text-uppercase"><?php echo translate('city')?></label>
+                                    <label for="" class="text-uppercase"><?php echo translate('Regions')?></label>
                                     <select class="form-control form-control-sm selectpicker s_city" name="city">
                                         <option value=""><?php echo translate('choose_a_state_first')?></option>
                                     </select>

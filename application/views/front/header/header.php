@@ -49,24 +49,10 @@
 											</li>
 										<?php } ?>
 										<!-- <li class="custom-nav"><a class="nav-link " href="about.php" aria-haspopup="true" aria-expanded="false">About</a></li> -->
-						                <li class="custom-nav dropdown">
-						                <a class="nav-link <?php if($page == 'listing' || $page == 'member_profile'){?>nav_active<?php }?>" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						                <?php echo translate('active_members')?></a>
-						                <ul class="dropdown-menu" style="border: 1px solid #f1f1f1 !important;">
-						                    <li class="dropdown dropdown-submenu">
-						                    <li>
-						                    <a class="dropdown-item <?php if(!empty($nav_dropdown)){if($nav_dropdown == 'all_members'){?>nav_active_dropdown<?php }}?>" href="<?=base_url()?>home/listing">
-						                    <?php echo translate('all_members')?></a>
-						                    </li>
-						                    <li>
-						                    <a class="dropdown-item <?php if(!empty($nav_dropdown)){if($nav_dropdown == 'premium_members'){?>nav_active_dropdown<?php }}?>" href="<?=base_url()?>home/listing/premium_members">
-						                    <?php echo translate('premium_members')?></a>
-						                    </li>
-						                    <li>
-						                    <a class="dropdown-item <?php if(!empty($nav_dropdown)){if($nav_dropdown == 'free_members'){?>nav_active_dropdown<?php }}?>" href="<?=base_url()?>home/listing/free_members">
-						                    <?php echo translate('free_members')?></a>
-						                    </li>
-						                </ul>
+						                <li class="custom-nav ">
+						                <a class="nav-link <?php if($page == 'listing' || $page == 'member_profile'){?>nav_active<?php }?>" href="<?=base_url()?>home/listing" >
+						                <?php echo translate('all_members')?></a>
+						                
 						                </li>
 						                <li class="custom-nav">
 						                <a class="nav-link <?php if($page == 'plans' || $page == 'subscribe'){?>nav_active<?php }?>" href="<?=base_url()?>home/plans" aria-haspopup="true" aria-expanded="false">

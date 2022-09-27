@@ -29,7 +29,7 @@
             <?php endif ?>
             <?php foreach ($all_plans as $value): ?>
 
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <?php if ($value->plan_id == 1) { $package_class = "text-line-through"; } else { $package_class = "active"; } ?>
                     <div class="feature feature--boxed-border feature--bg-2 active package_bg mt-4">
                         <div class="icon-block--style-1-v5 text-center">

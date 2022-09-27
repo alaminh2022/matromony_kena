@@ -9,7 +9,7 @@
 
 class Dpo
 {
-    protected static $test_api_url = 'https://secure1.sandbox.directpay.online';
+    protected static $test_api_url = 'https://secure1.sandbox.directpay.online/API/v6/';
     protected static $test_pay_url = 'https://secure1.sandbox.directpay.online/payv2.php';
     protected static $live_api_url = 'https://secure.3gdirectpay.com/API/v6/';
     protected static $live_pay_url = 'https://secure.3gdirectpay.com/payv2.php';
@@ -75,8 +75,8 @@ class Dpo
 
         $this->company_token = $dpoCompanyToken;
         $this->service_type  = $dpoServiceType;
-        $this->redirectURL = 'https://mfoundlove.com/success';
-        $this->backURL = 'https://mfoundlove.com/failed';
+        $this->redirectURL = base_url().'dpo-success';
+        $this->backURL = base_url().'dpo-failed';
     }
 
     /**
@@ -108,7 +108,7 @@ class Dpo
             </Service>
 POSTXML;
 
-        $customerPhone = preg_replace('/[^0-9]/', '', $data['customerPhone']);
+        $customerPhone = preg_replace('/[^0-9]/', '', '');
 
         $postXml = <<<POSTXML
         <?xml version="1.0" encoding="utf-8"?> <API3G> <CompanyToken>{$data['companyToken']}</CompanyToken> <Request>createToken</Request> <Transaction> <PaymentAmount>{$data['paymentAmount']}</PaymentAmount> <PaymentCurrency>{$data['paymentCurrency']}</PaymentCurrency> <CompanyRef>{$data['companyRef']}</CompanyRef> <customerDialCode>{$data['customerDialCode']}</customerDialCode> <customerZip>{$data['customerZip']}</customerZip> <customerCountry>{$data['customerCountry']}</customerCountry> <customerFirstName></customerFirstName> <customerLastName></customerLastName> <customerAddress>{$data['customerAddress']}</customerAddress> <customerCity>{$data['customerCity']}</customerCity> <customerPhone>{$customerPhone}</customerPhone> <RedirectURL>{$data['redirectURL']}</RedirectURL> <BackURL>{$data['backURL']}</BackURL> <customerEmail>{$data['customerEmail']}</customerEmail> </Transaction> <Services>$service</Services> </API3G>
@@ -185,7 +185,7 @@ POSTXML;
      */
     public function verifyToken($data)
     {
-        $companyToken = $data['companyToken'];
+        $companyToken =$this->company_token;
         $transToken   = $data['transToken'];
 
         $verified = false;
@@ -224,6 +224,7 @@ POSTXML;
                     return $response;
                 }
             } catch (Exception $e) {
+                print_r($e);
                 $cnt++;
             }
         }

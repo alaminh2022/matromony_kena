@@ -30,19 +30,19 @@ class Admin extends CI_Controller {
 			$page_data['total_premium_members'] = $this->db->get_where('member', array('membership' => 2))->num_rows();
 			$page_data['total_free_members'] = $this->db->get_where('member', array('membership' => 1))->num_rows();
 			$page_data['total_blocked_members'] = $this->db->get_where('member', array('is_blocked' => 'yes'))->num_rows();
-			$page_data['total_earnings'] = $this->db->select_sum('amount')->get('package_payment')->row()->amount;
+			$page_data['total_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('payment_status'=>'paid'))->row()->amount;
 
 			$last_month_timestamp = strtotime(date('d-m-Y h:i:s', strtotime("-1 months")));
-			$page_data['last_month_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('purchase_datetime >=' => $last_month_timestamp))->row()->amount;
+			$page_data['last_month_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('payment_status'=>'paid','purchase_datetime >=' => $last_month_timestamp))->row()->amount;
 
 			$last_3_months_timestamp = strtotime(date('d-m-Y h:i:s', strtotime("-3 months")));
-			$page_data['last_3_months_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('purchase_datetime >=' => $last_3_months_timestamp))->row()->amount;
+			$page_data['last_3_months_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('payment_status'=>'paid','purchase_datetime >=' => $last_3_months_timestamp))->row()->amount;
 
 			$half_yearly_timestamp = strtotime(date('d-m-Y h:i:s', strtotime("-6 months")));
-			$page_data['half_yearly_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('purchase_datetime >=' => $half_yearly_timestamp))->row()->amount;
+			$page_data['half_yearly_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('payment_status'=>'paid','purchase_datetime >=' => $half_yearly_timestamp))->row()->amount;
 
 			$last_year_timestamp = strtotime(date('d-m-Y h:i:s', strtotime("-12 months")));
-			$page_data['yearly_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('purchase_datetime >=' => $last_year_timestamp))->row()->amount;
+			$page_data['yearly_earnings'] = $this->db->select_sum('amount')->get_where('package_payment', array('payment_status'=>'paid','purchase_datetime >=' => $last_year_timestamp))->row()->amount;
 
 			$page_data['total_stories'] = $this->db->get('happy_story')->num_rows();
 			$page_data['approved_stories'] = $this->db->get_where('happy_story', array('approval_status' => 1))->num_rows();
