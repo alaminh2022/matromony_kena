@@ -694,6 +694,8 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
 
                             $("#payment_loader").hide();
                             $("#payment_section").show();
+                            $("#active_modal").modal({backdrop: 'static', keyboard: false});
+                            $("#modal_header").html("<?php echo translate('DPO_Payment');?>");
                             $("#modal_body").html('<div class="text-center" ><p> '+response.data.error+'</p></div>');
                         }
                 }

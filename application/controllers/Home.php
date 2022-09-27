@@ -3886,7 +3886,7 @@ class Home extends CI_Controller {
             'customerLastName'  =>  $member->last_name,
             'customerAddress'   =>  $this->session->userdata('member_email'),
             'customerCity'      => '',
-            'customerPhone'     =>  $member->mobile,
+            // 'customerPhone'     =>  $member->mobile,
             'customerEmail'     =>  $this->session->userdata('member_email'),
             
         ];
