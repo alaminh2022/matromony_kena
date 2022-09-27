@@ -3900,7 +3900,7 @@ class Home extends CI_Controller {
        }else{
             $returnResponse = array(
                 'status'=>false,
-                'data'=>'Payment failed'
+                'data'=>$tokenResponse
             );
             echo json_encode($returnResponse);
        }
