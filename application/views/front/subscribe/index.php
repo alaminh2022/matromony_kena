@@ -691,8 +691,10 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
                             // var htmliFreme =`<iframe src="${payData.redirect_url}" ></iframe>`;
                             // $('#pesapalifrem').html(htmliFreme);
                         }else{
+
                             $("#payment_loader").hide();
                             $("#payment_section").show();
+                            $("#modal_body").html('<div class="text-center" ><p> '+response.data.error+'</p></div>');
                         }
                 }
 
