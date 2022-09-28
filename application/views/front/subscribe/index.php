@@ -88,7 +88,7 @@
                     </div>
                 <?php }else{ ?>
                     <div class="text-center">
-                        <h4 class="pt-5 pb-4 font_base"><?php echo translate('select_a_payment_method')?></h4>
+                        <h4 class="pt-5 pb-4 font_base"><?php echo translate('Choose a payment method')?></h4>
                     </div>
 
                     <div class="row pb-4">
@@ -110,40 +110,142 @@
                                         text-align: center;
                                         font-size: 11px;
                                     }
+                                    .payment-option {
+                                        min-height: 52px;
+                                    }
+                                    .justify-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.items-center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.pointer {
+    cursor: pointer;
+}
+
+.col-12 {
+    width: 100%;
+}
+.flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.icon-40 {
+    width: 30px;
+    height: 30px;
+}
+
+.green {
+    color: #7faf41;
+}
+.icon-40 {
+    width: 30px;
+    height: 30px;
+}
+[type=radio]~.icon .unchecked {
+    fill: #8c8c8c;
+    color: #fff;
+    display: block;
+}[type=radio]~.icon .unchecked {
+    fill: #8c8c8c;
+    color: #fff;
+    display: block;
+}
+[dir=ltr] .ms1 {
+    margin-left: .5rem;
+}
+.circle {
+    border-radius: 50%;
+}
+.relative {
+    position: relative;
+}
+.flex-none {
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+}
+.ms1 {
+    color: #b11e21;
+    font-size: 19px;
+}
+
+
                                 </style>
+                                
+                                
+                                  <?php
+                                  $mpesa_set = $this->db->get_where('business_settings', array('type' => 'mpesa_set'))->row()->value;
+                                  if ($mpesa_set=="ok"): ?>
+                                  <div  class="row">
+
+                                        <div id="select_mpesa" class="mb2 pointer payment-option flex items-center" >
+                                            <div class="flex items-center justify-between col-12">
+                                                <label  class="pointer col-12">
+                                                    <div class="flex items-center">
+                                                        <input type="radio" name="mpesa" class=""  value="1" >
+                                                        
+                                                        <div class="col-5 me2">
+                                                            <div class="ms1">
+                                                                M-Pesa
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex items-center col-8 ms2">
+                                                            <img style="height: 102px;" src="<?=base_url()?>template/front/images/mpesa.png">
+                                         
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                  <?php endif ?>
+                                  <?php
+                                  $dpo_set = $this->db->get_where('business_settings', array('type' => 'dpo_set'))->row()->value;
+                                  if ($dpo_set=="ok"): ?>
+                                   <div class="row">
+                                        <div id="select_dpo" class="mb2 pointer payment-option flex items-center" data-only-show-this="credit">
+                                            <div class="flex items-center justify-between col-12">
+                                                <label  class="pointer col-12">
+                                                    <div class="flex items-center">
+                                                        <input type="radio" name="paymentMethod" class="changeCurrency" id="credit" value="1,1" >
+                                                        
+                                                        <div class="col-5 me2">
+                                                            <div class="ms1">
+                                                                DPO GROUP 
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex items-center col-8 ms2">
+                                                            
+                                                                    <div class="bank-logo me1 flex items-center"><img class="fit" src="https://www.afrointroductions.com/assets/images/upgradeMembership/1.png"></div>
+                                                                
+                                                                    <div class="bank-logo me1 flex items-center"><img class="fit" src="https://www.afrointroductions.com/assets/images/upgradeMembership/2.png"></div>
+                                                                
+                                                                    <div class="bank-logo me1 flex items-center"><img class="fit" src="https://www.afrointroductions.com/assets/images/upgradeMembership/3.png"></div>
+                                                                
+                                                                    <div class="bank-logo me1 flex items-center"><img class="fit" src="https://www.afrointroductions.com/assets/images/upgradeMembership/132.png"></div>
+                                                                
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                
+                                            </div>
+                                        </div>
+                                     
+                                    </div>
+                                  <?php endif ?>
+                                
                                 <div class="row">
-                                <?php
-                                  $paypal_set = $this->db->get_where('business_settings', array('type' => 'dpo_set'))->row()->value;
-                                  if ($paypal_set=="ok"): ?>
-                                      <div class="col-4">
-                                          <div class="card mb-3 card-paypal" style="background: transparent;">
-                                              <a id="select_dpo">
-                                                  <div class="card-image" style="text-align: center;">
-                                                      <img style="height: 102px;" src="<?=base_url()?>template/front/images/dpo.svg">
-                                                      <div class="text-center bg-base-1" style="height: 26px;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;">
-                                                          <span class="span-text" id="select_dpo_text" style=""><?=translate('select')?></span>
-                                                      </div>
-                                                  </div>
-                                              </a>
-                                          </div>
-                                      </div>
-                                  <?php endif ?>
-                                <?php
-                                  $paypal_set = $this->db->get_where('business_settings', array('type' => 'mpesa_set'))->row()->value;
-                                  if ($paypal_set=="ok"): ?>
-                                      <div class="col-4">
-                                          <div class="card mb-3 card-paypal" style="background: transparent;">
-                                              <a id="select_mpesa">
-                                                  <div class="card-image" style="text-align: center;">
-                                                      <img style="height: 102px;" src="<?=base_url()?>template/front/images/mpesa.png">
-                                                      <div class="text-center bg-base-1" style="height: 26px;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;">
-                                                          <span class="span-text" id="select_mpesa_text" style=""><?=translate('select')?></span>
-                                                      </div>
-                                                  </div>
-                                              </a>
-                                          </div>
-                                      </div>
-                                  <?php endif ?>
+                                
+                                
                                   <?php
                                   $paypal_set = $this->db->get_where('business_settings', array('type' => 'paypal_set'))->row()->value;
                                   if ($paypal_set=="ok"): ?>
@@ -694,7 +796,7 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
 
                             $("#payment_loader").hide();
                             $("#payment_section").show();
-                            $("#active_modal").modal({backdrop: 'static', keyboard: false});
+                            $("#active_modal").modal({backdrop: true, keyboard: true});
                             $("#modal_header").html("<?php echo translate('DPO_Payment');?>");
                             $("#modal_body").html('<div class="text-center" ><p> '+response.data.error+'</p></div>');
                         }
@@ -739,9 +841,7 @@ $userData = $this->db->get_where("member", array("member_id" => $this->session->
             $( ".cp_method_3_detail").addClass('d-none');
             $( ".cp_method_4_detail").addClass('d-none');
         });
-        $('#select_dpo').click(function(){
-            
-        })
+        
         $("#select_mpesa").click(function(){
             $("#select_mpesa_text").html("<?php echo translate('selected')?>");
             $("#select_paypal_text").html("<?php echo translate('select')?>");
