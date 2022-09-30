@@ -4019,17 +4019,18 @@ class Home extends CI_Controller {
         $CCDapproval = $this->input->get('CCDapproval');
         $payData= $this->db->get_where('package_payment', array('dpoTransToken'=>$TransactionToken))->row();
         if($payData->dpoTransToken){
-            // $this->load->library('dpo');
-            // $checkPay['transToken'] = $payData->dpoTransToken;
-            // $responsePay= $this->dpo->verifyToken($checkPay);
-
+            $this->load->library('dpo');
+            $checkPay['transToken'] = $payData->dpoTransToken;
+            $responsePay= $this->dpo->verifyToken($checkPay);
+            if($responsePay->Result == '000'){
+                $this->db->update('package_payment', array('payment_status'=>'paid','dpoVerifiyResponse'=>json_encode($responsePay)), array('package_payment_id'=>$payData->package_payment_id));
                 $payment_id                = $payData->package_payment_id;
                 $payment                   = $this->db->get_where('package_payment',array('package_payment_id' => $payment_id))->row();
                 $data['payment_details']   = json_encode($_GET);
                 $data['purchase_datetime'] = time();
                 $data['payment_code']      = date('Ym', $data['purchase_datetime']) . $payment_id;
                 $data['payment_timestamp'] = time();
-                $data['payment_type']      = 'Pesapal';
+                $data['payment_type']      = 'dpo';
                 $data['payment_status']    = 'paid';
                 $data['expire']            = 'no';
                 $this->db->where('package_payment_id', $payment_id);
@@ -4063,7 +4064,18 @@ class Home extends CI_Controller {
                 $this->session->set_flashdata('alert', 'Pesapal_success');
                 redirect(base_url() . 'home/invoice/'.$payment_id, 'refresh');
                 $this->session->set_userdata('payment_id', '');
-           
+            }else{
+                print_r($responsePay);
+                exit;
+                $payment_id = $payData->package_payment_id;
+                $this->db->where('package_payment_id', $payment_id);
+                $this->db->delete('package_payment');
+                recache();
+                $this->session->set_userdata('payment_id', '');
+                $this->session->set_flashdata('alert', 'Pesapal_fail');
+                redirect(base_url() . 'home/plans', 'refresh');
+            }
+              
         }else{
             $payment_id = $payData->package_payment_id;
             $this->db->where('package_payment_id', $payment_id);

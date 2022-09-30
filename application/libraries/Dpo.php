@@ -220,8 +220,12 @@ POSTXML;
                     $cnt++;
                 } else {
                     $verified = true;
-
-                    return $response;
+                    if ($response !== false && substr($response, 0, 5) === '<?xml') {
+                        // Convert the XML result into array
+                        return new SimpleXMLElement($response);
+                    }
+            
+                   
                 }
             } catch (Exception $e) {
                 print_r($e);
