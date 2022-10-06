@@ -27,7 +27,7 @@
 							                    </li>
 												<li class="dropdown dropdown--style-2 dropdown--animated float-left">
 								                    <a class="dropdown-icon dropdown-toggle has-notification" href="#" data-toggle="dropdown" aria-expanded="false">
-									                    <i class="ion-ios-email-outline"></i>
+													<i class="fa fa-comments" aria-hidden="true"></i>
 								                    </a>
 								                    <?php include 'messages.php'; ?>
 							                    </li>

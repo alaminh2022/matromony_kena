@@ -143,7 +143,7 @@ foreach ($get_all_members as $member): ?>
                             
                             <a class="<?=$message_class?>"  <?=$message_id?>  <?=$message_attr?> >
                                 
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <i class="fa fa-comments" aria-hidden="true"></i>
                             </a>
                         </li>
                         <li class="listing-hover">
